@@ -12,7 +12,8 @@ export default function CameraManagementList() {
   const [cameraList, setCameraList] = useState([]);
   const [totalElements, setTotalElements] = useState(0);
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(10); // 실제 적용되는 pageSize
+  const [pendingPageSize, setPendingPageSize] = useState(10); // 드롭다운에서 선택한 임시 값
   const [initialLoading, setInitialLoading] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -65,6 +66,11 @@ export default function CameraManagementList() {
     }
   };
 
+  const handleQueryClick = () => {
+    setPage(0);
+    setPageSize(pendingPageSize); // 실제 적용값 변경
+  };
+
   const totalPages = Math.ceil(totalElements / pageSize);
   const visiblePageCount = 5;
   const half = Math.floor(visiblePageCount / 2);
@@ -108,17 +114,16 @@ export default function CameraManagementList() {
         </div>
         <div className="cml-top-controls">
           <select
-            value={pageSize}
-            onChange={(e) => {
-              setPageSize(parseInt(e.target.value));
-              setPage(0);
-            }}
+            value={pendingPageSize}
+            onChange={(e) => setPendingPageSize(parseInt(e.target.value))}
           >
             <option value={10}>10</option>
-            <option value={30}>30</option>
             <option value={50}>50</option>
+            <option value={200}>200</option>
+            <option value={1000}>1000</option>
+            <option value={2000}>2000</option>
           </select>
-          <button className="cml-btn" onClick={() => fetchCameras(page, pageSize)}>조회</button>
+          <button className="cml-btn" onClick={handleQueryClick}>조회</button>
         </div>
       </section>
 
@@ -143,7 +148,7 @@ export default function CameraManagementList() {
             </thead>
             <AnimatePresence mode="wait">
               <motion.tbody
-                key={`page-${page}-${isFetching}`} // 중요: 키가 페이지 또는 fetch 상태 바뀔 때마다 바뀌게
+                key={`page-${page}-${isFetching}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
