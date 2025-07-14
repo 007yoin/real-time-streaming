@@ -5,9 +5,9 @@ import './css/index.css'
 import { AuthGate } from './AuthGate.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <BrowserRouter> 
       <AuthGate />
     </BrowserRouter>
-  </StrictMode>
+  // </StrictMode>
 )

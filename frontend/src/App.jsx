@@ -20,22 +20,21 @@ export function App() {
   const isLoginPage = location.pathname === '/login';
 
   const pageVariants = {
-    initial: { opacity: 0, y: 20 },
+    initial: { opacity: 0, y: 10 },
     animate: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
+      transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
     },
     exit: {
       opacity: 0,
       y: -10,
-      transition: { duration: 0.15, ease: [0.4, 0, 0.2, 1] },
+      transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
     },
   };
 
   return (
     <>
-      {/* ✅ 글로벌 ToastContainer */}
       <ToastContainer
         containerId="global"
         position="top-right"
@@ -48,19 +47,9 @@ export function App() {
       />
 
       {isLoginPage ? (
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={location.pathname}
-            variants={pageVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-          >
-            <Routes location={location} key={location.pathname}>
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
-          </motion.div>
-        </AnimatePresence>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
       ) : (
         <div className="app-container">
           <Header />

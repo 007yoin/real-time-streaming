@@ -10,11 +10,10 @@ export default function CameraInsert() {
     name: '',
     description: '',
     systemName: '',
-    organizationName: '',
     categoryLarge: '',
     categoryMedium: '',
     categorySmall: '',
-    streamingUrl: '', // ✅ 추가
+    streamingUrl: '',
     cameraType: '',
     address: '',
     latitude: '',
@@ -63,7 +62,7 @@ export default function CameraInsert() {
         </table>
       </section>
 
-      <section className="ci-section">
+      <section className="ci-section stream-info-scroll">
         <h3>스트리밍 정보</h3>
         <table className="ci-table">
           <tbody>
@@ -71,10 +70,6 @@ export default function CameraInsert() {
               <th>시스템명 <span style={{ color: 'red' }}>*</span></th>
               <td>
                 <input type="text" name="systemName" value={form.systemName} onChange={handleChange} />
-              </td>
-              <th>기관명 <span style={{ color: 'red' }}>*</span></th>
-              <td>
-                <input type="text" name="organizationName" value={form.organizationName} onChange={handleChange} />
               </td>
             </tr>
             <tr>
@@ -125,6 +120,9 @@ export default function CameraInsert() {
         <button className="ci-btn ci-gray" onClick={() => navigate('/cml')}>목록</button>
         <button className="ci-btn ci-blue" onClick={handleSubmit}>등록</button>
       </div>
+
+      {/* 푸터와 딱 붙는 것 방지용 더미 영역 */}
+      <div className="ci-scroll-bottom-gap" />
     </>
   );
 }
