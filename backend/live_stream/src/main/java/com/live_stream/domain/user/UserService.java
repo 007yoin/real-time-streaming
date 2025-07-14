@@ -22,6 +22,7 @@ public class UserService {
                 .loginId(userJoinDto.getLoginId())
                 .password(bCryptPasswordEncoder.encode(userJoinDto.getPassword()))
                 .name(userJoinDto.getName())
+                .role(userJoinDto.getRole())
                 .build();
 
         User savedUser = userRepository.save(newUser);
