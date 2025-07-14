@@ -1,0 +1,276 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f6f7;
+    color: #333;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Layout */
+.layout {
+    display: flex;
+    height: calc(100vh - 55px); /* 헤더 높이 제외 */
+}
+
+/* Main Content */
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.main-body {
+    display: flex;
+    height: 100%;
+    gap: 20px;
+    overflow: hidden;
+}
+
+/* Left Panel */
+.left-panel {
+    flex: 0 0 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.section {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.section.toolbar,
+.section.status,
+.section.split-buttons {
+    flex: 0 0 auto;
+}
+
+.section.stream-list {
+    flex: 1 1 auto;
+    overflow: auto;
+    min-height: 0;
+}
+
+/* 즐겨찾기 영역 */
+.toolbar {
+    background-color: #f9f9f9;
+}
+
+.toolbar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.toolbar-row:last-child {
+    margin-bottom: 0;
+}
+
+.toolbar label {
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 90px;
+    color: #222;
+}
+
+.toolbar input[type="text"],
+.toolbar select {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.toolbar button {
+    padding: 6px 14px;
+    font-size: 14px;
+    border: none;
+    background-color: #34568b;
+    color: white;
+    border-radius: 4px;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.toolbar button:hover {
+    background-color: #2a4670;
+}
+
+/* 스트리밍 현황 */
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+    margin-top: 10px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 6px;
+    gap: 8px;
+}
+
+.status-item .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.status-item .count {
+    margin-left: auto;
+    font-weight: bold;
+}
+
+.icon.pause {
+    background: #bcbcbc url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>') no-repeat center/70%;
+}
+
+.icon.play {
+    background: #57c98f url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="8,5 19,12 8,19"/></svg>') no-repeat center/70%;
+}
+
+.icon.stop {
+    background: #e26d6d url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="12" height="12"/></svg>') no-repeat center/70%;
+}
+
+.icon.client-stop {
+    background: #ffb84f;
+}
+
+.icon.inactive {
+    background: #7e7e7e;
+}
+
+.icon.error {
+    background: #9d4edd url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15h-1v-1h1v1zm1-4h-2V7h2v6z"/></svg>') no-repeat center/70%;
+}
+
+/* 분할 버튼 */
+.split-buttons {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.split-buttons button {
+    margin: 5px;
+    padding: 6px 14px;
+    background: #34568b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.split-buttons button:hover {
+    background: #2c3e6b;
+}
+
+/* 스트리밍 목록 */
+.stream-list .filter-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tab {
+    background: #ccc;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: #2f3d56;
+    color: white;
+}
+
+.tree-view {
+    background: white;
+    padding: 10px;
+    height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.action-buttons button {
+    margin-right: 10px;
+}
+
+/* 영상 출력 그리드 */
+.right-panel {
+    flex: 1;
+    height: 100%;
+    overflow: auto; /* 🔥 스크롤을 줄 위치 */
+}
+
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    min-width: 800px; /* 🔥 최소 가로폭 */
+    /*min-height: 800px; !* 🔥 최소 세로높이 *!*/
+    padding: 10px;
+    min-height: 100%;
+    max-height: 100%;
+}
+
+.video-box {
+    background: #ddd;
+    border: 1px solid #999;
+    border-radius: 4px;
+    overflow: hidden; /* 이미지가 넘치지 않도록 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-box img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Section Title */
+.section h3 {
+    font-size: 20px;
+    margin: 6px 0 10px;
+    color: #222;
+}
+
+
+.bottom-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.left-buttons,
+.right-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}

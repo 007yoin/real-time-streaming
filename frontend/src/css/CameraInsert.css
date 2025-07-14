@@ -1,0 +1,148 @@
+/* camera-insert.css (React 컴포넌트 전용 스타일) */
+
+/* Reset & Base */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+	background-color: #f4f5f7;
+	color: #1f2937;
+}
+
+/* Section 공통 */
+.ci-section {
+	background-color: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+	padding: 24px;
+}
+
+/* 제목 */
+.ci-section h3 {
+	font-size: 20px;
+	font-weight: 600;
+	color: #1f2937;
+	margin-bottom: 20px;
+}
+
+/* 테이블 */
+.ci-table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #ffffff;
+	border-radius: 8px;
+	font-size: 14px;
+	table-layout: auto;
+	overflow: hidden;
+}
+
+.ci-table th {
+	background-color: #f9fafb;
+	text-align: left;
+	padding: 12px 14px;
+	font-weight: 600;
+	color: #374151;
+	width: 15%;
+	vertical-align: middle;
+	border: 1px solid #e5e7eb;
+	white-space: nowrap;
+}
+
+.ci-table td {
+	padding: 12px 14px;
+	background-color: #ffffff;
+	border: 1px solid #e5e7eb;
+	vertical-align: middle;
+}
+
+/* 입력 요소 */
+.ci-table input[type="text"],
+.ci-table select,
+.ci-table textarea {
+	width: 100%;
+	max-width: 100%;
+	padding: 10px 12px;
+	font-size: 14px;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	background-color: #f9fafb;
+	color: #111827;
+	transition: border-color 0.2s ease;
+	box-sizing: border-box;
+}
+
+.ci-table input:disabled {
+	background-color: #e5e7eb;
+	color: #6b7280;
+	cursor: not-allowed;
+}
+
+.ci-table input:focus,
+.ci-table select:focus,
+.ci-table textarea:focus {
+	border-color: #4A6086;
+	background-color: #ffffff;
+	outline: none;
+}
+
+.ci-table textarea {
+	resize: vertical;
+	min-height: 80px;
+	overflow: auto;
+}
+
+/* 체크박스 */
+.ci-table input[type="checkbox"] {
+	transform: scale(1.2);
+}
+
+/* 하단 버튼 영역 */
+.ci-bottom-actions {
+	margin: 24px 24px 24px 24px;
+	display: flex;
+	justify-content: flex-end;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+/* 버튼 공통 스타일 */
+.ci-btn {
+	padding: 10px 18px;
+	font-size: 14px;
+	border-radius: 6px;
+	font-weight: 500;
+	cursor: pointer;
+	border: none;
+	transition: background-color 0.2s ease;
+	color: #ffffff;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+	white-space: nowrap;
+}
+
+/* 기본 버튼 - 스트리밍 뷰어와 동일한 톤 */
+.ci-btn.ci-blue {
+	background-color: #4a5a8a;
+}
+.ci-btn.ci-blue:hover {
+	background-color: #353c5f;
+}
+
+/* 강조 버튼 */
+.ci-btn.ci-red {
+	background-color: #d05c5c;
+}
+.ci-btn.ci-red:hover {
+	background-color: #b34848;
+}
+
+/* 보조 버튼 */
+.ci-btn.ci-gray {
+	background-color: #6b7280;
+}
+.ci-btn.ci-gray:hover {
+	background-color: #4b5563;
+}

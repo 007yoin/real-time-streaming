@@ -1,0 +1,43 @@
+.main-header {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid #ccc;
+    height: 55px;
+    min-width: 300px; /* ✅ 최소 폭 */
+}
+
+.logo {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a2b4c; /* 딥네이비 */
+    letter-spacing: -0.4px;
+    line-height: 1.2;
+    white-space: nowrap;
+    user-select: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.06); /* 은은한 그림자 */
+}
+
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.user-menu span,
+.user-menu a {
+    color: #333;
+    text-decoration: none;
+}
+
+.user-menu a.logout {
+    font-weight: bold;
+    color: #b00;
+}

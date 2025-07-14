@@ -1,0 +1,90 @@
+.sidebar {
+    width: 240px;
+    background: linear-gradient(180deg, #34425e, #2b344a);
+    color: #f1f1f1;
+    padding: 25px 15px;
+    height: 100%;
+    font-family: 'Noto Sans KR', 'Segoe UI', sans-serif;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    margin-bottom: 12px;
+}
+
+.menu-title {
+    cursor: pointer;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    user-select: none;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-title:hover,
+.menu-title.active {
+    background-color: #4e5f78;
+    color: #ffffff;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.arrow {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border: solid #ccc;
+    border-width: 0 2px 2px 0;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+}
+
+.menu-item.open .arrow {
+    transform: rotate(-135deg);
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    padding-left: 18px;
+    margin-top: 4px;
+}
+
+.menu-item.open .submenu {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.submenu li {
+    margin: 4px 0;
+}
+
+.submenu a {
+    color: #d3d9e3;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    display: block;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.submenu a:hover,
+.submenu a.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}

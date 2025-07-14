@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>스트리밍 뷰어</title>
+
+    <link rel="stylesheet" href="/css/streaming_viewer.css"/>
+    <link rel="stylesheet" href="/css/sidebar.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+
+    <script defer src="/js/include.js"></script>
+
+</head>
+
+<body>
+<!-- 🔽 여기에 헤더 삽입됨 -->
+<header class="main-header" id="include-header"></header>
+
+<div class="layout">
+    <!-- 🔽 여기에 사이드바 삽입됨 -->
+    <aside class="sidebar" id="include-sidebar"></aside>
+
+    <main class="content">
+        <div class="main-body">
+            <div class="left-panel">
+                <section class="section toolbar">
+                    <h3>즐겨찾기</h3>
+                    <div class="toolbar-row">
+                        <input type="text" placeholder="입력"/>
+                        <button>즐겨찾기 저장</button>
+                    </div>
+                    <div class="toolbar-row">
+                        <select>
+                            <option>선택</option>
+                        </select>
+                        <button>불러오기</button>
+                        <button>즐겨찾기 제거</button>
+                    </div>
+                </section>
+
+                <!-- [SECTION 2] 스트리밍 현황 -->
+                <section class="section status">
+                    <h3>스트리밍 현황</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span class="icon pause"></span>
+                            <span>대기</span>
+                            <span class="count">10274</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="icon play"></span>
+                            <span>조회중</span>
+                            <span class="count">110</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="icon stop"></span>
+                            <span>정지</span>
+                            <span class="count">2565</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="icon client-stop"></span>
+                            <span>클라이언트정지</span>
+                            <span class="count">156</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="icon inactive"></span>
+                            <span>비활성화</span>
+                            <span class="count">716</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="icon error"></span>
+                            <span>에러</span>
+                            <span class="count">0</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- [SECTION 3] 분할 버튼 -->
+                <section class="section split-buttons">
+                    <button>1분할</button>
+                    <button>4분할</button>
+                    <button>9분할</button>
+                    <button>16분할</button>
+                </section>
+
+
+                <section class="section stream-list">
+                    <h3>스트리밍목록</h3>
+                    <div class="filter-tabs">
+                        <button class="tab active">지역별</button>
+                        <button class="tab">용도별</button>
+                        <input type="text" placeholder="검색..."/>
+                        <button class="search-btn">검색</button>
+                    </div>
+                    <div class="tree-view">
+                        <ul>
+                            <li>📁 유관기관 [7903 / 6375 / 1528]</li>
+                            <li>📁 지자체 [5202 / 3994 / 1208]</li>
+                        </ul>
+                    </div>
+                    <div class="action-buttons">
+                        <button>적용</button>
+                        <button>초기화</button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="right-panel">
+                <section class="section video-grid">
+                    <div class="video-box">
+                        <img src="/images/example1.png" alt="카메라 예시4"/>
+                    </div>
+                    <div class="video-box">
+                        <img src="/images/example2.png" alt="카메라 예시4"/>
+                    </div>
+                    <div class="video-box">
+                        <img src="/images/example3.png" alt="카메라 예시4"/>
+                    </div>
+                    <div class="video-box">
+                        <img src="/images/example4.jfif" alt="카메라 예시4"/>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

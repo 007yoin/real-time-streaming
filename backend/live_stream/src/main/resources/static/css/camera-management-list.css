@@ -1,0 +1,299 @@
+/* Reset & Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+    background-color: #f4f5f7;
+    color: #1f2937;
+}
+
+/* Layout */
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+.content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+/* Section */
+.section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    padding: 24px;
+    margin-bottom: 20px; /* ✅ 추가: 섹션 간 여백 */
+}
+
+.section h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+/* Filter Panel */
+.filter-panel {
+    margin-bottom: 20px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.filter-item label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b5563;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.filter-item input,
+.filter-item select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #f9fafb;
+    font-size: 14px;
+    color: #111827;
+    transition: border-color 0.2s ease;
+}
+
+.filter-item input:focus,
+.filter-item select:focus {
+    border-color: #4A6086;
+}
+
+/* Result Header */
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.result-header .count strong {
+    color: #111827;
+}
+
+.result-header .right-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.result-header select {
+    padding: 8px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.result-header .btn {
+    background-color: #3A4F75;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.result-header .btn:hover {
+    background-color: #2F3F5E;
+}
+
+/* Table */
+.table-container {
+    overflow-x: auto;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-container th,
+.table-container td {
+    padding: 12px 10px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.table-container thead {
+    background-color: #f9fafb;
+    color: #374151;
+}
+
+.table-container a {
+    color: #4A6086;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+}
+
+.badge.wait {
+    background-color: #6b7280;
+}
+
+.badge.stop {
+    background-color: #D05C5C;
+}
+
+.badge.play {
+    background-color: #4A6086;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 6px;
+}
+
+.pagination button,
+.pagination span {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-number {
+    background-color: #3A4F75;
+    color: white;
+    font-weight: bold;
+    border-color: transparent;
+}
+
+/* Bottom Actions */
+.bottom-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.bottom-actions .btn {
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn.blue {
+    background-color: #4A6086;
+}
+
+.btn.blue:hover {
+    background-color: #3B4E70;
+}
+
+.btn.red {
+    background-color: #D05C5C;
+}
+
+.btn.red:hover {
+    background-color: #B34848;
+}
+
+.btn {
+    color: #ffffff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: linear-gradient(to bottom, #2c3552, #1e2236);
+    color: #ffffff;
+    padding: 20px 16px;
+}
+
+.sidebar h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #d1d5db;
+}
+
+/* Header */
+.main-header {
+    height: 55px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+/* ✅ 조회 select + 버튼 (윗쪽으로 이동한 스타일) */
+.top-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.top-controls select {
+    padding: 8px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.top-controls .btn {
+    background-color: #3A4F75;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.top-controls .btn:hover {
+    background-color: #2F3F5E;
+}
+
+/* ✅ 총 건수만 보여주는 경우 */
+.result-header.only-count {
+    font-size: 14px;
+    margin-bottom: 12px;
+}

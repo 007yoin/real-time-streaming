@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>사용자 관리</title>
+    <link rel="stylesheet" href="/css/user-management.css"/>
+    <link rel="stylesheet" href="/css/sidebar.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <script defer src="/js/include.js"></script>
+</head>
+<body>
+<header class="main-header" id="include-header"></header>
+<div class="layout">
+    <aside class="sidebar" id="include-sidebar"></aside>
+    <main class="content">
+        <!-- 섹션 1: 사용자 정보 -->
+        <section class="section">
+            <h3>사용자 관리</h3>
+            <table class="table">
+                <tr>
+                    <th>사용자 ID</th>
+                    <td><input type="text" disabled></td>
+                    <th>비밀번호 변경</th>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <th>사용자명 <span style="color:red">*</span></th>
+                    <td><input type="text"></td>
+                    <th>비밀번호 변경 확인</th>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <th>권한 <span style="color:red">*</span></th>
+                    <td>
+                        <select>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="USER">USER</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>비고</th>
+                    <td colspan="3"><textarea rows="3"></textarea></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-actions">
+            <button class="btn blue">목록</button>
+            <button class="btn blue">수정</button>
+        </div>
+    </main>
+</div>
+</body>
+</html>

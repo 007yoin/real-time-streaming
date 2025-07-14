@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>카메라 등록</title>
+    <link rel="stylesheet" href="/css/camera-insert.css"/>
+    <link rel="stylesheet" href="/css/sidebar.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <script defer src="/js/include.js"></script>
+</head>
+<body>
+<header class="main-header" id="include-header"></header>
+<div class="layout">
+    <aside class="sidebar" id="include-sidebar"></aside>
+    <main class="content">
+        <!-- 섹션 1: 스트리밍 관리 -->
+        <section class="section">
+            <h3>스트리밍 관리</h3>
+            <table class="table">
+                <tr>
+                    <th>스트리밍명 <span style="color:red">*</span></th>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <th>비고</th>
+                    <td><textarea rows="3"></textarea></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 섹션 2: 스트리밍 정보 -->
+        <section class="section">
+            <h3>스트리밍 정보</h3>
+            <table class="table">
+                <tr>
+                    <th>시스템명 <span style="color:red">*</span></th>
+                    <td><input type="text"></td>
+                    <th>기관명 <span style="color:red">*</span></th>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <th>대분류 <span style="color:red">*</span></th>
+                    <td><input type="text"></td>
+                    <th>중분류</th>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <th>소분류</th>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <th>유형 <span style="color:red">*</span></th>
+                    <td><input type="text"></td>
+                    <th>주소</th>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <th>위도</th>
+                    <td><input type="text"></td>
+                    <th>경도</th>
+                    <td><input type="text"></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 섹션 4: 하단 버튼 -->
+        <div class="bottom-actions">
+            <button class="btn blue">목록</button>
+            <button class="btn blue">등록</button>
+        </div>
+    </main>
+</div>
+</body>
+</html>

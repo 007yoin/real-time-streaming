@@ -1,0 +1,66 @@
+/* 헤더 전체 영역 */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: #ffffff; /* 밝은 배경 */
+  border-bottom: 1px solid #e0e0e0;
+  font-family: 'Noto Sans KR', 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* 로고 스타일 */
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;      /* ✅ 글씨 더 큼 */
+  font-weight: 800;
+  gap: 8px;
+  color: #1f2a40;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.logo::before {
+  content: '📺';        /* ✅ 정적인 이모지 */
+  font-size: 26px;      /* ✅ 아이콘만 조금 더 큼 */
+  margin-right: 4px;
+}
+
+/* 애니메이션 효과 */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+/* 우측 유저 메뉴 */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  font-size: 14px;
+}
+
+.user-menu span,
+.user-menu a {
+  color: #2e3a59;
+  text-decoration: none;
+}
+
+.user-menu span {
+  font-weight: 500;
+}
+
+.user-menu a.logout {
+  font-weight: bold;
+  color: #d32f2f;
+}

@@ -1,0 +1,168 @@
+/* camera-insert.css - camera-management 스타일과 통일 + 칸 넘침 방지 */
+
+/* Reset & Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+    background-color: #f4f5f7;
+    color: #1f2937;
+}
+
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+.content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+/* Section 공통 */
+.section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.section h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+/* 테이블 스타일 (입력폼 테이블) */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 14px;
+    table-layout: auto;
+}
+
+.table th {
+    background-color: #f9fafb;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    color: #374151;
+    width: 15%;
+    vertical-align: middle;
+    border: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.table td {
+    padding: 12px 14px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+/* 입력 요소 (공통: td 범위 넘지 않도록 설정) */
+.table input[type="text"],
+.table select,
+.table textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #f9fafb;
+    color: #111827;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.table input:disabled {
+    background-color: #e5e7eb;
+    color: #6b7280;
+}
+
+.table input:focus,
+.table select:focus,
+.table textarea:focus {
+    border-color: #4A6086;
+    background-color: #ffffff;
+    outline: none;
+}
+
+.table textarea {
+    resize: vertical;
+    min-height: 80px;
+    overflow: auto;
+}
+
+/* 체크박스 */
+.table input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+/* 하단 버튼 영역 */
+.bottom-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease;
+    color: #ffffff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.btn.blue {
+    background-color: #4A6086;
+}
+
+.btn.blue:hover {
+    background-color: #3B4E70;
+}
+
+.btn.red {
+    background-color: #D05C5C;
+}
+
+.btn.red:hover {
+    background-color: #B34848;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: linear-gradient(to bottom, #2c3552, #1e2236);
+    color: #ffffff;
+    padding: 20px 16px;
+}
+
+/* Header */
+.main-header {
+    height: 55px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}

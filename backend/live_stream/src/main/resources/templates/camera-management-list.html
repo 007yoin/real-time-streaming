@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>개별 카메라 관리</title>
+    <link rel="stylesheet" href="/css/camera-management-list.css"/>
+    <link rel="stylesheet" href="/css/sidebar.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <script defer src="/js/include.js"></script>
+</head>
+<body>
+<header class="main-header" id="include-header"></header>
+<div class="layout">
+    <aside class="sidebar" id="include-sidebar"></aside>
+    <main class="content">
+        <div class="main-body">
+
+            <!-- 🔹 섹션 1: 필터 영역 -->
+            <section class="section">
+                <h3>개별 카메라 관리</h3>
+                <div class="filter-panel">
+                    <div class="filter-grid">
+                        <div class="filter-item">
+                            <label>스트리밍명</label>
+                            <input type="text"/>
+                        </div>
+                        <div class="filter-item">
+                            <label>기관명</label>
+                            <input type="text"/>
+                        </div>
+                        <div class="filter-item">
+                            <label>상태코드</label>
+                            <select>
+                                <option>선택</option>
+                                <option>대기</option>
+                                <option>처리중</option>
+                                <option>정지</option>
+                                <option>비활성화</option>
+                                <option>에이전트정지</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>대분류</label>
+                            <input type="text"/>
+                        </div>
+                        <div class="filter-item">
+                            <label>중분류</label>
+                            <input type="text"/>
+                        </div>
+                        <div class="filter-item">
+                            <label>소분류</label>
+                            <input type="text"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="top-controls">
+                    <select>
+                        <option>10</option>
+                        <option>30</option>
+                        <option>50</option>
+                    </select>
+                    <button class="btn">조회</button>
+                </div>
+
+            </section>
+
+            <!-- 🔹 섹션 2: 결과 및 액션 영역 -->
+            <section class="section">
+                <div class="result-header">
+                    <div class="result-header only-count">
+                        총 <strong>13821</strong>건
+                    </div>
+                </div>
+
+                <!-- 결과 테이블 -->
+                <div class="table-container">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox"/></th>
+                            <th>스트리밍번호</th>
+                            <th>스트리밍명</th>
+                            <th>기관명</th>
+                            <th>대분류</th>
+                            <th>중분류</th>
+                            <th>소분류</th>
+                            <th>소스상태</th>
+                            <th>상태코드</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td><a href="#">STREAM_106101</a></td>
+                            <td><a href="#">북벽_N</a></td>
+                            <td>충북_충북도청_N</td>
+                            <td>지자체</td>
+                            <td>충북</td>
+                            <td>단양군</td>
+                            <td><span class="badge wait">대기</span></td>
+                            <td><span class="badge stop">정지</span></td>
+                        </tr>
+                        <!-- More rows -->
+                        </tbody>
+                    </table>
+
+                    <!-- 페이지네이션 -->
+                    <div class="pagination">
+                        <button>&laquo;</button>
+                        <button>&lsaquo;</button>
+                        <span class="page-number">1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <button>&rsaquo;</button>
+                        <button>&raquo;</button>
+                    </div>
+                </div>
+
+                <!-- 하단 버튼 영역 -->
+                <div class="bottom-actions">
+                    <div class="left-buttons">
+                        <button class="btn blue">엑셀 업로드 샘플</button>
+                        <button class="btn blue">엑셀파일 스트리밍 등록</button>
+                        <button class="btn blue">스트리밍 데이터 다운로드</button>
+                    </div>
+                    <div class="right-buttons">
+                        <button class="btn red">정지</button>
+                        <button class="btn blue">시작</button>
+                        <button class="btn blue">등록</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+</body>
+</html>
