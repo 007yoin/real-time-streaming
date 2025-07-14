@@ -1,10 +1,11 @@
 package com.live_stream.domain.user.dto;
 
-import lombok.AllArgsConstructor;
+import com.live_stream.domain.user.Role;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class UserJoinDto {
 
     private String loginId;
@@ -12,5 +13,7 @@ public class UserJoinDto {
     private String password;
 
     private String name;
+
+    private Role role = Role.USER;
 
 }

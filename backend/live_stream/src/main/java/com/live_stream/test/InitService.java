@@ -1,5 +1,8 @@
 package com.live_stream.test;
 
+import static com.live_stream.domain.user.Role.ADMIN;
+import static com.live_stream.domain.user.Role.USER;
+
 import com.live_stream.domain.camera.CameraService;
 import com.live_stream.domain.camera.dto.CameraInsertDto;
 import com.live_stream.domain.user.UserService;
@@ -22,9 +25,30 @@ public class InitService {
     }
 
     private void userInit() {
-        userService.saveUser(
-                new UserJoinDto("test", "test", "test")
-        );
+        UserJoinDto userJoinDto1 = new UserJoinDto();
+        userJoinDto1.setLoginId("test");
+        userJoinDto1.setPassword("test");
+        userJoinDto1.setName("test");
+        userJoinDto1.setRole(ADMIN);
+
+        UserJoinDto userJoinDto2 = new UserJoinDto();
+        userJoinDto2.setLoginId("user");
+        userJoinDto2.setPassword("user");
+        userJoinDto2.setName("user");
+        userJoinDto2.setRole(USER);
+
+        userService.saveUser(userJoinDto1);
+        userService.saveUser(userJoinDto2);
+
+        for (int i = 0; i < 111; ++i) {
+            UserJoinDto dto = new UserJoinDto();
+            dto.setLoginId("user" + i);
+            dto.setPassword("user");
+            dto.setName("user");
+            dto.setRole(USER);
+            userService.saveUser(dto);
+        }
+
     }
 
     private void cameraInit() {
@@ -108,74 +132,86 @@ public class InitService {
         cameraService.saveCamera(cameraInsertDto4);
         cameraService.saveCamera(cameraInsertDto5);
 
-
-
         cameraService.saveCamera(cameraInsertDto1);
         cameraService.saveCamera(cameraInsertDto2);
         cameraService.saveCamera(cameraInsertDto3);
         cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
         cameraService.saveCamera(cameraInsertDto2);
         cameraService.saveCamera(cameraInsertDto3);
         cameraService.saveCamera(cameraInsertDto4);
         cameraService.saveCamera(cameraInsertDto5);
-
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
+        cameraService.saveCamera(cameraInsertDto1);
+        cameraService.saveCamera(cameraInsertDto2);
+        cameraService.saveCamera(cameraInsertDto3);
+        cameraService.saveCamera(cameraInsertDto4);
+        cameraService.saveCamera(cameraInsertDto5);
 
 
     }

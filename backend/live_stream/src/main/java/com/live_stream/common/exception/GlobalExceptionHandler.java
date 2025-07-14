@@ -1,14 +1,14 @@
 package com.live_stream.common.exception;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RestControllerAdvice
 @Slf4j
@@ -19,6 +19,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(BAD_REQUEST)
     public ErrorResponse handleDataIntegrityViolation(DataIntegrityViolationException ex) {
         // DB UNIQUE 제약조건 이름 (users.login_id에 설정된 제약)
+        log.error(ex.getMessage(), ex);
         if (isUniqueViolationOn("users_login_id_key", ex)) {
             return new ErrorResponse(400, "이미 존재하는 아이디입니다.");
         }
