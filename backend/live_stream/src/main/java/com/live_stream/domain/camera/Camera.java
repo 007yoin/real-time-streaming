@@ -21,7 +21,7 @@ public class Camera extends BaseEntity {
     @Column(name = "camera_id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 50) // unique 걸어야함
     private String name; // 스트리밍명
 
     private String description; // 비고

@@ -1,5 +1,6 @@
 package com.live_stream.common.auth;
 
+import com.live_stream.common.jwt.JwtStatus;
 import com.live_stream.common.jwt.JwtUtil;
 import com.live_stream.common.security.CustomUserDetailsDto;
 import com.live_stream.domain.user.dto.LoginRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 
 import static com.live_stream.common.jwt.JwtStatus.VALID;
+import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -59,7 +61,6 @@ public class AuthController {
         return accessToken;
     }
 
-    @ResponseStatus(OK)
     @GetMapping("/auth/check")
     public void checkToken(HttpServletRequest request, HttpServletResponse response) {
         log.info("checkToken");
@@ -72,18 +73,19 @@ public class AuthController {
         }
 
         String token = bearer.substring(7);
-        if (jwtUtil.validateTokenStatus(token) != VALID) {
+        JwtStatus jwtStatus = jwtUtil.validateTokenStatus(token);
+        log.info("checkToken tkn status: {}", jwtStatus);
+        if (jwtStatus != VALID) {
             response.setStatus(SC_UNAUTHORIZED);
         }
     }
 
-    @ResponseStatus(OK)
     @PostMapping("/auth/refresh")
     public String refreshAccessToken(HttpServletRequest request, HttpServletResponse response) {
         String refreshToken = extractRefreshTokenFromCookies(request);
 
         if (refreshToken == null || jwtUtil.validateTokenStatus(refreshToken) != VALID) {
-            response.setStatus(SC_UNAUTHORIZED);
+            response.setStatus(SC_BAD_REQUEST);
             log.info("Refreshing access token fail");
             return null;
         }
