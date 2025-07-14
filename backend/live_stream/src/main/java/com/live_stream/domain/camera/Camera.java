@@ -3,9 +3,12 @@ package com.live_stream.domain.camera;
 import com.live_stream.common.baseentity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import static com.live_stream.domain.camera.CameraStatus.STOPPED;
 
 @Entity
 @Getter
@@ -27,9 +30,6 @@ public class Camera extends BaseEntity {
     private String systemName; // 시스템명
 
     @Column(nullable = false)
-    private String organizationName; // 기관명
-
-    @Column(nullable = false)
     private String categoryLarge; // 대분류
 
     private String categoryMedium; // 중분류
@@ -46,5 +46,14 @@ public class Camera extends BaseEntity {
     private Double latitude; // 위도
 
     private Double longitude; // 경도
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CameraStatus status = STOPPED; // 카메라 상태
+
+    @Builder.Default
+    @Column(nullable = false)
+    private boolean isDeleted = false; // 삭제 여부
 
 }

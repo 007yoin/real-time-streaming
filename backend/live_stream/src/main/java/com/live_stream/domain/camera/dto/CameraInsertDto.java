@@ -14,8 +14,6 @@ public class CameraInsertDto {
 
     private String systemName; // 시스템명
 
-    private String organizationName; // 기관명
-
     private String categoryLarge; // 대분류
 
     private String categoryMedium; // 중분류

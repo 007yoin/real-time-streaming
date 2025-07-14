@@ -15,7 +15,6 @@ public class CameraService {
                 .name(cameraInsertDto.getName())
                 .description(cameraInsertDto.getDescription())
                 .systemName(cameraInsertDto.getSystemName())
-                .organizationName(cameraInsertDto.getOrganizationName())
                 .categoryLarge(cameraInsertDto.getCategoryLarge())
                 .categoryMedium(cameraInsertDto.getCategoryMedium())
                 .categorySmall(cameraInsertDto.getCategorySmall())
