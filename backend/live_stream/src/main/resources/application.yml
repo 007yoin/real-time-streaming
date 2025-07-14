@@ -9,10 +9,10 @@ spring:
     cache: false
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/livestream
-    driver-class-name: org.postgresql.Driver
-    username: livestream
-    password: "sj102030"
+    url: jdbc:mysql://localhost:3306/livestream?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: "wnstjr4231!"
 
   jpa:
     hibernate:
@@ -21,7 +21,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
 jwt:
   secret: "sad98fjsd98fj8zmvusrvduawrevuyawr0vayvwrvawr=vwaa=yrav"
+
+logging:
+  level:
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
