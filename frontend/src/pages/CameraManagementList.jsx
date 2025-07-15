@@ -178,12 +178,8 @@ export default function CameraManagementList() {
                       <td>
                         <input type="checkbox" />
                       </td>
-                      <td>
-                        <a href="#">STREAM_{camera.id}</a>
-                      </td>
-                      <td>
-                        <a href="#">{camera.name}</a>
-                      </td>
+                      <td>STREAM_{camera.id}</td>
+                      <td>{camera.name}</td>
                       <td>{camera.systemName}</td>
                       <td>{camera.categoryLarge}</td>
                       <td>{camera.categoryMedium}</td>
