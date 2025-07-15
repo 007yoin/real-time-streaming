@@ -12,8 +12,8 @@ export default function CameraManagementList() {
   const [cameraList, setCameraList] = useState([]);
   const [totalElements, setTotalElements] = useState(0);
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10); // 실제 적용되는 pageSize
-  const [pendingPageSize, setPendingPageSize] = useState(10); // 드롭다운에서 선택한 임시 값
+  const [pageSize, setPageSize] = useState(10);
+  const [pendingPageSize, setPendingPageSize] = useState(10);
   const [initialLoading, setInitialLoading] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -70,7 +70,7 @@ export default function CameraManagementList() {
 
   const handleQueryClick = () => {
     setPage(0);
-    setPageSize(pendingPageSize); // 실제 적용값 변경
+    setPageSize(pendingPageSize);
   };
 
   const totalPages = Math.ceil(totalElements / pageSize);
@@ -161,6 +161,8 @@ export default function CameraManagementList() {
                 <th>대분류</th>
                 <th>중분류</th>
                 <th>소분류</th>
+                <th>카메라유형</th>
+                <th>활성상태</th>
                 <th>상태코드</th>
               </tr>
             </thead>
@@ -181,9 +183,21 @@ export default function CameraManagementList() {
                       <td>STREAM_{camera.id}</td>
                       <td>{camera.name}</td>
                       <td>{camera.systemName}</td>
-                      <td>{camera.categoryLarge}</td>
-                      <td>{camera.categoryMedium}</td>
-                      <td>{camera.categorySmall}</td>
+                      <td>{camera.largeCategoryName || ""}</td>
+                      <td>{camera.mediumCategoryName || ""}</td>
+                      <td>{camera.smallCategoryName || ""}</td>
+
+                      <td>{camera.typeName || ""}</td>
+                      <td>
+                        <span
+                          className={`cml-badge ${
+                            camera.active ? "cml-active" : "cml-inactive"
+                          }`}
+                        >
+                          {camera.active ? "활성" : "비활성"}
+                        </span>
+                      </td>
+
                       <td>
                         <span
                           className={`cml-badge ${
@@ -197,7 +211,7 @@ export default function CameraManagementList() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="8" style={{ textAlign: "center" }}>
+                    <td colSpan="10" style={{ textAlign: "center" }}>
                       {isFetching ? "로딩 중..." : "표시할 카메라가 없습니다."}
                     </td>
                   </tr>
