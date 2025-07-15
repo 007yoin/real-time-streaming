@@ -8,11 +8,15 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserDto {
 
+    private Long id;
+
     private String loginId;
 
     private String name;
 
     private Role role;
+
+    private String description;
 
     private boolean isDeleted;
 

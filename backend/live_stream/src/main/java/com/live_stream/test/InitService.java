@@ -1,15 +1,15 @@
 package com.live_stream.test;
 
-import static com.live_stream.domain.user.Role.ADMIN;
-import static com.live_stream.domain.user.Role.USER;
-
 import com.live_stream.domain.camera.CameraService;
 import com.live_stream.domain.camera.dto.CameraInsertDto;
 import com.live_stream.domain.user.UserService;
-import com.live_stream.domain.user.dto.UserJoinDto;
+import com.live_stream.domain.user.dto.UserRequestDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import static com.live_stream.domain.user.Role.ADMIN;
+import static com.live_stream.domain.user.Role.USER;
 
 @Component
 @RequiredArgsConstructor
@@ -25,23 +25,23 @@ public class InitService {
     }
 
     private void userInit() {
-        UserJoinDto userJoinDto1 = new UserJoinDto();
-        userJoinDto1.setLoginId("test");
-        userJoinDto1.setPassword("test");
-        userJoinDto1.setName("test");
-        userJoinDto1.setRole(ADMIN);
+        UserRequestDto userRequestDto1 = new UserRequestDto();
+        userRequestDto1.setLoginId("test");
+        userRequestDto1.setPassword("test");
+        userRequestDto1.setName("test");
+        userRequestDto1.setRole(ADMIN);
 
-        UserJoinDto userJoinDto2 = new UserJoinDto();
-        userJoinDto2.setLoginId("user");
-        userJoinDto2.setPassword("user");
-        userJoinDto2.setName("user");
-        userJoinDto2.setRole(USER);
+        UserRequestDto userRequestDto2 = new UserRequestDto();
+        userRequestDto2.setLoginId("user");
+        userRequestDto2.setPassword("user");
+        userRequestDto2.setName("user");
+        userRequestDto2.setRole(USER);
 
-        userService.saveUser(userJoinDto1);
-        userService.saveUser(userJoinDto2);
+        userService.saveUser(userRequestDto1);
+        userService.saveUser(userRequestDto2);
 
-        for (int i = 0; i < 111; ++i) {
-            UserJoinDto dto = new UserJoinDto();
+        for (int i = 0; i < 33; ++i) {
+            UserRequestDto dto = new UserRequestDto();
             dto.setLoginId("user" + i);
             dto.setPassword("user");
             dto.setName("user");

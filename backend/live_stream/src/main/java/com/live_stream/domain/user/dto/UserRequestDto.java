@@ -6,13 +6,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserJoinDto {
+public class UserRequestDto {
 
     private String loginId;
 
     private String password;
 
     private String name;
+
+    private String description;
 
     private Role role = Role.USER;
 

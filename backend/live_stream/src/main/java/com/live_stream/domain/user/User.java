@@ -1,6 +1,7 @@
 package com.live_stream.domain.user;
 
 import com.live_stream.common.baseentity.BaseEntity;
+import com.live_stream.domain.user.dto.UserRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -31,6 +32,8 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 100)
     private String name;
 
+    private String description; // 비고
+
     @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -40,4 +43,18 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private boolean isDeleted = false;
 
+    public void delete() {
+        this.isDeleted = true;
+    }
+
+    public void update(UserRequestDto userRequestDto) {
+        this.loginId = userRequestDto.getLoginId();
+        this.name = userRequestDto.getName();
+        this.description = userRequestDto.getDescription();
+        this.role = userRequestDto.getRole();
+    }
+
+    public void updatePassword(String encode) {
+        this.password = encode;
+    }
 }
