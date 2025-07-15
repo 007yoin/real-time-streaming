@@ -126,7 +126,7 @@ export default function UserManagement() {
             취소
           </button>
           <button
-            className="modal-btn confirm"
+            className="modal-btn confirm-update"
             ref={confirmBtnRef}
             onClick={onConfirm}
           >

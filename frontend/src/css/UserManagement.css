@@ -187,3 +187,12 @@ textarea.um-input {
 .modal-btn.confirm:hover {
   background-color: #b34848;
 }
+
+.modal-btn.confirm-update {
+  background-color: #22c55e; /* green */
+  color: white;
+}
+
+.modal-btn.confirm-update:hover {
+  background-color: #16a34a;
+}
