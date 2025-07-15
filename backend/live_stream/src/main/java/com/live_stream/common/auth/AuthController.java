@@ -3,7 +3,7 @@ package com.live_stream.common.auth;
 import com.live_stream.common.jwt.JwtStatus;
 import com.live_stream.common.jwt.JwtUtil;
 import com.live_stream.common.security.CustomUserDetailsDto;
-import com.live_stream.domain.user.dto.LoginRequest;
+import com.live_stream.domain.user.dto.LoginRequestDto;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,13 +31,13 @@ public class AuthController {
 
     @ResponseStatus(OK)
     @PostMapping("/auth/login")
-    public String login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
+    public String login(@RequestBody LoginRequestDto loginRequestDto, HttpServletResponse response) {
         log.info("Login Request");
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getLoginId(),
-                        loginRequest.getPassword()
+                        loginRequestDto.getLoginId(),
+                        loginRequestDto.getPassword()
                 )
         );
 

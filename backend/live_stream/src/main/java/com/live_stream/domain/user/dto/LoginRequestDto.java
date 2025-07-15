@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class LoginRequest {
+public class LoginRequestDto {
 
     private String loginId;
 

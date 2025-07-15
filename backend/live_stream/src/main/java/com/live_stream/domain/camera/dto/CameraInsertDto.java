@@ -6,23 +6,17 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CameraInsertDto {
-    private Long id;
-
     private String name; // 스트리밍명
 
     private String description; // 비고
 
-    private String systemName; // 시스템명
+    private Long systemId; // 시스템 ID
 
-    private String categoryLarge; // 대분류
+    private Long cameraTypeId; // 카메라 유형 ID
 
-    private String categoryMedium; // 중분류
-
-    private String categorySmall; // 소분류
+    private Long cameraCategoryId; // 카메라 카테고리 ID
 
     private String streamingUrl; // url
-
-    private String cameraType; // 유형
 
     private String address; // 주소
 
