@@ -1,26 +1,44 @@
 package com.live_stream.test;
 
+import static com.live_stream.domain.cameracategory.CameraCategoryType.LARGE;
+import static com.live_stream.domain.cameracategory.CameraCategoryType.MEDIUM;
+import static com.live_stream.domain.user.Role.ADMIN;
+import static com.live_stream.domain.user.Role.USER;
+
 import com.live_stream.domain.camera.CameraService;
 import com.live_stream.domain.camera.dto.CameraInsertDto;
+import com.live_stream.domain.cameracategory.CameraCategoryService;
+import com.live_stream.domain.cameracategory.dto.CameraCategoryDto;
+import com.live_stream.domain.camerasystem.CameraSystemService;
+import com.live_stream.domain.camerasystem.dto.CameraSystemDto;
+import com.live_stream.domain.cameratype.CameraTypeService;
+import com.live_stream.domain.cameratype.dto.CameraTypeDto;
 import com.live_stream.domain.user.UserService;
 import com.live_stream.domain.user.dto.UserRequestDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import static com.live_stream.domain.user.Role.ADMIN;
-import static com.live_stream.domain.user.Role.USER;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class InitService {
 
-    private final UserService userService;
-    private final CameraService cameraService;
+    private final UserService us;
+    private final CameraService cs;
+    private final CameraSystemService css;
+    private final CameraTypeService cts;
+    private final CameraCategoryService ccs;
 
     @PostConstruct
     public void init() {
         userInit();
+
+        cameraSystemInit();
+        cameraTypeInit();
+        cameraCategoryInit();
+
         cameraInit();
     }
 
@@ -37,8 +55,8 @@ public class InitService {
         userRequestDto2.setName("user");
         userRequestDto2.setRole(USER);
 
-        userService.saveUser(userRequestDto1);
-        userService.saveUser(userRequestDto2);
+        us.save(userRequestDto1);
+        us.save(userRequestDto2);
 
         for (int i = 0; i < 20; ++i) {
             UserRequestDto dto = new UserRequestDto();
@@ -46,94 +64,95 @@ public class InitService {
             dto.setPassword("user");
             dto.setName("user");
             dto.setRole(USER);
-            userService.saveUser(dto);
+            us.save(dto);
         }
 
     }
 
     private void cameraSystemInit() {
+        CameraSystemDto cameraSystemDto = new CameraSystemDto(
+                "Camera-System-#1", "1번 시스템",
+                false, false
+        );
+        css.save(cameraSystemDto);
+    }
 
+    private void cameraTypeInit() {
+        CameraTypeDto ctDto1 = new CameraTypeDto(
+                "도로"
+        );
+        CameraTypeDto ctDto2 = new CameraTypeDto(
+                "하천"
+        );
+        CameraTypeDto ctDto3 = new CameraTypeDto(
+                "학교앞"
+        );
+
+        cts.save(ctDto1);
+        cts.save(ctDto2);
+        cts.save(ctDto3);
+    }
+
+    private void cameraCategoryInit() {
+        CameraCategoryDto catDto1 = new CameraCategoryDto(
+                null, LARGE, null, "유관기관"
+        );
+
+        CameraCategoryDto savedCategory1 = ccs.save(catDto1);
+
+        CameraCategoryDto catDto2 = new CameraCategoryDto(
+                null, MEDIUM, savedCategory1.getCategoryId(), "용인교통정보센터"
+        );
+
+        ccs.save(catDto2);
     }
 
     private void cameraInit() {
         CameraInsertDto cameraInsertDto1 = new CameraInsertDto(
-                null, // ID will be auto-generated
                 "흥덕교",
-                null,
-                "Internet-System#1",
-                "유관기관",
-                "용인교통정보센터",
-                null,
+                "흥덕교 부근",
+                1L, 2L, 2L,
                 "http://211.249.12.147:1935/live/video69.stream/playlist.m3u8",
-                "도로",
-                null,
-                37.2716932,
-                127.0910779
+                "주소", 37.2716932, 127.0910779
         );
 
         CameraInsertDto cameraInsertDto2 = new CameraInsertDto(
-                null, // ID will be auto-generated
                 "죽전육교",
-                null,
-                "Internet-System#1",
-                "유관기관",
-                "용인교통정보센터",
-                null,
+                "죽전육교 부근",
+                1L, 2L, 2L,
                 "http://211.249.12.147:1935/live/video86.stream/playlist.m3u8",
-                "도로",
-                null,
-                37.32723616,
-                127.13377143
+                "도로", 37.32723616, 127.13377143
         );
 
         CameraInsertDto cameraInsertDto3 = new CameraInsertDto(
-                null, // ID will be auto-generated
                 "화운사입구3",
-                null,
-                "Internet-System#1",
-                "유관기관",
-                "용인교통정보센터",
-                null,
+                "화운사입구3 부근",
+                1L, 2L, 1L,
                 "http://211.249.12.147:1935/live/video34.stream/playlist.m3u8",
-                "도로",
-                null,
-                37.2541872,
-                127.1660996
+                "도로", 37.2541872, 127.1660996
         );
 
         CameraInsertDto cameraInsertDto4 = new CameraInsertDto(
-                null, // ID will be auto-generated
                 "호수공원삼거리",
-                null,
-                "Internet-System#1",
-                "유관기관",
-                "용인교통정보센터",
-                null,
+                "호수공원삼거리 부근",
+                1L, 2L, 1L,
                 "http://211.249.12.147:1935/live/video22.stream/playlist.m3u8",
-                "도로",
-                null,
-                37.2757328,
-                127.1481881
+                "도로", 37.2757328, 127.1481881
         );
 
         CameraInsertDto cameraInsertDto5 = new CameraInsertDto(
-                null, // ID will be auto-generated
                 "풍덕천사거리",
-                null,
-                "Internet-System#1",
-                "유관기관",
-                "용인교통정보센터",
-                null,
+                "풍덕천사거리 부근",
+                1L, 2L, 1L,
                 "http://211.249.12.147:1935/live/video9.stream/playlist.m3u8",
-                "도로",
-                null,
-                37.3243,
-                127.1027
+                "도로", 37.3243, 127.1027
         );
-        cameraService.saveCamera(cameraInsertDto1);
-        cameraService.saveCamera(cameraInsertDto2);
-        cameraService.saveCamera(cameraInsertDto3);
-        cameraService.saveCamera(cameraInsertDto4);
-        cameraService.saveCamera(cameraInsertDto5);
+
+        cs.save(cameraInsertDto1);
+        cs.save(cameraInsertDto2);
+        cs.save(cameraInsertDto3);
+        cs.save(cameraInsertDto4);
+        cs.save(cameraInsertDto5);
+
     }
 }

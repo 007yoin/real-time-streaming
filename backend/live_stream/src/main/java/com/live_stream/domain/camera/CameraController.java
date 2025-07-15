@@ -18,21 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class CameraController {
 
-    private final CameraService cameraService;
-    private final CameraSearchService cameraSearchService;
+    private final CameraService cs;
+    private final CameraSearchService css;
 
     @PostMapping("/camera")
-    public CameraInsertDto saveCamera(@RequestBody CameraInsertDto cameraInsertDto) {
-        cameraService.saveCamera(cameraInsertDto);
-
-        log.info("Save camera {}", cameraInsertDto);
-
-        return cameraInsertDto;
+    public CameraDto save(@RequestBody CameraInsertDto cameraInsertDto) {
+        log.debug("Save camera {}", cameraInsertDto);
+        return cs.save(cameraInsertDto);
     }
 
     @GetMapping("/camera/recent")
     public Page<CameraDto> getRecentCameras(
             @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
-        return cameraSearchService.getRecentCameras(pageable);
+        log.debug("Get recent cameras {}", pageable);
+        return css.getRecentCameras(pageable);
     }
 }

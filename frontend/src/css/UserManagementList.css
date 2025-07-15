@@ -113,7 +113,7 @@ body {
 
 /* Pagination */
 .uml-pagination {
-  display: flex; /* wrap 제거 */
+  display: flex;
   justify-content: center;
   margin-top: 20px;
   gap: 6px;
@@ -138,7 +138,6 @@ body {
   font-weight: bold;
 }
 
-/* 유효하지 않은(빈) 페이지 넘버는 완전히 숨김 */
 .uml-page-number.uml-disabled {
   pointer-events: none;
   opacity: 0;
@@ -199,4 +198,57 @@ body {
 .uml-bottom-actions {
   margin-top: 30px;
   justify-content: space-between;
+}
+
+/* 상태/활성 뱃지 공통 스타일 */
+.cml-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 상태코드 색상 */
+.cml-wait {
+  background-color: #a3a3a3;
+  color: white;
+}
+
+.cml-processing {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.cml-stop {
+  background-color: #ef4444;
+  color: white;
+}
+
+.cml-disabled {
+  background-color: #6b7280;
+  color: white;
+}
+
+.cml-agent-stop {
+  background-color: #f97316;
+  color: white;
+}
+
+.cml-default {
+  background-color: #9ca3af;
+  color: white;
+}
+
+/* 활성 상태 색상 */
+.cml-active {
+  background-color: #10b981;
+  color: white;
+}
+
+.cml-inactive {
+  background-color: #d1d5db;
+  color: #1f2937;
 }
