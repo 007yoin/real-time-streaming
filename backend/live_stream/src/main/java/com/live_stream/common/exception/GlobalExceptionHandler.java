@@ -29,6 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     @ResponseStatus(BAD_REQUEST)
     public ErrorResponse handleBadCredentials(BadCredentialsException ex) {
+        log.error(ex.getMessage(), ex);
         return new ErrorResponse(400, ex.getMessage());
     }
 

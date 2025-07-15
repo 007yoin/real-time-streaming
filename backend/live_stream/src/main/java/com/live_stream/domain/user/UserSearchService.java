@@ -11,24 +11,24 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserSearchService {
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
+    private final UserRepository ur;
+    private final UserMapper um;
 
     public User findById(Long userId) {
-        return userRepository.findById(userId).orElseThrow(
+        return ur.findById(userId).orElseThrow(
                 () -> new IllegalArgumentException("User not found with id: " + userId)
         );
     }
 
     public UserDto findByIdNotDeleted(Long userId) {
-        User findUser = userRepository.findByIdAndIsDeletedFalse(userId).orElseThrow(
+        User findUser = ur.findByIdAndIsDeletedFalse(userId).orElseThrow(
                 () -> new IllegalArgumentException("User not found with id: " + userId)
         );
 
-        return userMapper.userToUserDto(findUser);
+        return um.userToUserDto(findUser);
     }
 
     public Page<UserDto> getRecentUsers(String loginId, String name, Role role, Pageable pageable) {
-        return userRepository.findRecentUserDtos(loginId, name, role, pageable);
+        return ur.findRecentUserDtos(loginId, name, role, pageable);
     }
 }

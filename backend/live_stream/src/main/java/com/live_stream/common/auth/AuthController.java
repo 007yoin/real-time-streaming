@@ -1,25 +1,28 @@
 package com.live_stream.common.auth;
 
+import static com.live_stream.common.jwt.JwtStatus.VALID;
+import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
+import static org.springframework.http.HttpStatus.OK;
+
 import com.live_stream.common.jwt.JwtStatus;
 import com.live_stream.common.jwt.JwtUtil;
 import com.live_stream.common.security.CustomUserDetailsDto;
-import com.live_stream.domain.user.dto.LoginRequest;
+import com.live_stream.domain.user.dto.LoginRequestDto;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-
-import static com.live_stream.common.jwt.JwtStatus.VALID;
-import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
-import static org.springframework.http.HttpStatus.OK;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,13 +34,13 @@ public class AuthController {
 
     @ResponseStatus(OK)
     @PostMapping("/auth/login")
-    public String login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
-        log.info("Login Request");
+    public String login(@RequestBody LoginRequestDto loginRequestDto, HttpServletResponse response) {
+        log.debug("Login request");
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getLoginId(),
-                        loginRequest.getPassword()
+                        loginRequestDto.getLoginId(),
+                        loginRequestDto.getPassword()
                 )
         );
 
@@ -62,8 +65,8 @@ public class AuthController {
     }
 
     @GetMapping("/auth/check")
-    public void checkToken(HttpServletRequest request, HttpServletResponse response) {
-        log.info("checkToken");
+    public void validateAccessToken(HttpServletRequest request, HttpServletResponse response) {
+        log.debug("Validate access token");
 
         String bearer = request.getHeader("Authorization");
 
@@ -74,7 +77,7 @@ public class AuthController {
 
         String token = bearer.substring(7);
         JwtStatus jwtStatus = jwtUtil.validateTokenStatus(token);
-        log.info("checkToken tkn status: {}", jwtStatus);
+
         if (jwtStatus != VALID) {
             response.setStatus(SC_UNAUTHORIZED);
         }
@@ -86,11 +89,11 @@ public class AuthController {
 
         if (refreshToken == null || jwtUtil.validateTokenStatus(refreshToken) != VALID) {
             response.setStatus(SC_BAD_REQUEST);
-            log.info("Refreshing access token fail");
+            log.debug("Refreshing access token fail");
             return null;
         }
 
-        log.info("Refreshing access token success");
+        log.debug("Refreshing access token success");
         // Access Token 재발급 (15분)
         return jwtUtil.createJwt(
                 jwtUtil.getLoginId(refreshToken),
@@ -103,7 +106,7 @@ public class AuthController {
     @ResponseStatus(OK)
     @PostMapping("/auth/logout")
     public void logout(HttpServletResponse response) {
-        log.info("Logout request");
+        log.debug("Logout request");
 
         Cookie refreshCookie = new Cookie("refreshToken", "");
         refreshCookie.setHttpOnly(true);
@@ -113,7 +116,9 @@ public class AuthController {
     }
 
     private String extractRefreshTokenFromCookies(HttpServletRequest request) {
-        if (request.getCookies() == null) return null;
+        if (request.getCookies() == null) {
+            return null;
+        }
 
         return Arrays.stream(request.getCookies())
                 .filter(cookie -> "refreshToken".equals(cookie.getName()))

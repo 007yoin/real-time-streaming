@@ -28,4 +28,4 @@ jwt:
 
 logging:
   level:
-    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    com.live_stream: debug # 내 코드만 debug
