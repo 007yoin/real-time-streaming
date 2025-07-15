@@ -1,10 +1,10 @@
-import '../css/streamingViewer.css';
+import "../css/streamingViewer.css";
 
 // 임시 이미지
-import example1 from '../assets/images/example1.png';
-import example2 from '../assets/images/example2.png';
-import example3 from '../assets/images/example3.png';
-import example4 from '../assets/images/example4.jfif';
+import example1 from "../assets/images/example1.png";
+import example2 from "../assets/images/example2.png";
+import example3 from "../assets/images/example3.png";
+import example4 from "../assets/images/example4.jfif";
 const images = [example1, example2, example3, example4];
 
 export default function StreamingViewer() {
@@ -33,12 +33,12 @@ export default function StreamingViewer() {
             <h3>스트리밍 현황</h3>
             <div className="sv-status-grid">
               {[
-                ['pause', '대기', 10274],
-                ['play', '조회중', 110],
-                ['stop', '정지', 2565],
-                ['client-stop', '클라이언트정지', 156],
-                ['inactive', '비활성화', 716],
-                ['error', '에러', 0],
+                ["pause", "대기", 10274],
+                ["play", "조회중", 110],
+                ["stop", "정지", 2565],
+                ["client-stop", "클라이언트정지", 156],
+                ["inactive", "비활성화", 716],
+                ["error", "에러", 0],
               ].map(([icon, label, count]) => (
                 <div className="sv-status-item" key={label}>
                   <span className={`sv-icon ${icon}`}></span>
@@ -51,7 +51,7 @@ export default function StreamingViewer() {
 
           {/* 분할 버튼 */}
           <section className="sv-section sv-split-buttons">
-            {[1, 4, 9, 16].map(n => (
+            {[1, 4, 9, 16].map((n) => (
               <button key={n}>{n}분할</button>
             ))}
           </section>
@@ -81,7 +81,7 @@ export default function StreamingViewer() {
 
       <div className="sv-right-panel">
         <section className="sv-section sv-video-grid">
-          {[1, 2, 3, 4].map(n => (
+          {[1, 2, 3, 4].map((n) => (
             <div className="sv-video-box" key={n}>
               <img src={images[n - 1]} alt={`카메라 예시${n}`} />
             </div>

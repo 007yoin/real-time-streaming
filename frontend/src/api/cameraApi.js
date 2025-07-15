@@ -1,5 +1,5 @@
 // src/api/cameraApi.js
-import axiosInstance from './axiosInstance';
+import axiosInstance from "./axiosInstance";
 
 /**
  * 카메라 정보를 서버에 전송 (간결 버전)
@@ -7,7 +7,7 @@ import axiosInstance from './axiosInstance';
  */
 export async function insertCamera(form) {
   return (
-    await axiosInstance.post('/camera', {
+    await axiosInstance.post("/camera", {
       ...form,
       id: null,
       latitude: form.latitude ? +form.latitude : null,

@@ -1,23 +1,23 @@
-import './css/App.css';
-import { Header } from './components/Header.jsx';
-import { Side } from './components/Side.jsx';
-import { Footer } from './components/Footer.jsx';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import "./css/App.css";
+import { Header } from "./components/Header.jsx";
+import { Side } from "./components/Side.jsx";
+import { Footer } from "./components/Footer.jsx";
+import { Routes, Route, useLocation } from "react-router-dom";
 
-import StreamingViewer from './pages/StreamingViewer.jsx';
-import CameraManagementList from './pages/CameraManagementList.jsx';
-import UserManagementList from './pages/UserManagementList.jsx';
-import UserManagement from './pages/UserManagement.jsx';
-import CameraInsert from './pages/CameraInsert.jsx';
-import LoginPage from './pages/Login.jsx';
+import StreamingViewer from "./pages/StreamingViewer.jsx";
+import CameraManagementList from "./pages/CameraManagementList.jsx";
+import UserManagementList from "./pages/UserManagementList.jsx";
+import UserManagement from "./pages/UserManagement.jsx";
+import CameraInsert from "./pages/CameraInsert.jsx";
+import LoginPage from "./pages/Login.jsx";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { AnimatePresence, motion } from "framer-motion";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function App() {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login';
+  const isLoginPage = location.pathname === "/login";
 
   const pageVariants = {
     initial: { opacity: 0, y: 10 },
@@ -73,7 +73,10 @@ export function App() {
                       <Route path="/um" element={<UserManagement />} />
                       <Route path="/ci" element={<CameraInsert />} />
                       <Route path="/" element={<h1>🏠 홈입니다</h1>} />
-                      <Route path="*" element={<h1>❌ 페이지를 찾을 수 없습니다</h1>} />
+                      <Route
+                        path="*"
+                        element={<h1>❌ 페이지를 찾을 수 없습니다</h1>}
+                      />
                     </Routes>
                   </motion.div>
                 </AnimatePresence>

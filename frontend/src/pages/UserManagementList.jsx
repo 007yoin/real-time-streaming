@@ -1,53 +1,83 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../api/axiosInstance';
-import '../css/UserManagementList.css';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
+import "../css/UserManagementList.css";
+import { AnimatePresence, motion } from "framer-motion";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { toast } from "react-toastify";
+
+// 삭제 모달 컴포넌트
+function ConfirmDeleteModal({ onClose, onConfirm }) {
+  const deleteBtnRef = useRef(null);
+
+  useEffect(() => {
+    deleteBtnRef.current?.focus();
+  }, []);
+
+  return (
+    <div className="delete-modal">
+      <h2>정말 삭제하시겠습니까?</h2>
+      <div className="delete-modal-actions">
+        <button className="modal-btn cancel" onClick={onClose}>
+          취소
+        </button>
+        <button
+          className="modal-btn confirm"
+          ref={deleteBtnRef}
+          onClick={() => {
+            onConfirm();
+            onClose();
+          }}
+        >
+          삭제
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function UserManagementList() {
   const navigate = useNavigate();
-
   const [users, setUsers] = useState([]);
+  const [selectedUserIds, setSelectedUserIds] = useState([]);
   const [totalElements, setTotalElements] = useState(0);
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [pendingPageSize, setPendingPageSize] = useState(10);
   const [isFetching, setIsFetching] = useState(false);
-
-  // ★ 追加: ボタン押下用カウンタ
   const [fetchCount, setFetchCount] = useState(0);
 
   const [filters, setFilters] = useState({
-    loginId: '',
-    name: '',
-    role: ''
+    loginId: "",
+    name: "",
+    role: "",
   });
 
   const fetchUsers = () => {
     setIsFetching(true);
     axiosInstance
-      .get('/user/recent', {
+      .get("/user/recent", {
         params: {
           page,
           size: pageSize,
           loginId: filters.loginId || null,
           name: filters.name || null,
           role: filters.role || null,
-        }
+        },
       })
-      .then(res => {
+      .then((res) => {
         setUsers(res.data.content);
         setTotalElements(res.data.totalElements);
       })
-      .catch(err => {
-        console.error('사용자 조회 실패', err);
+      .catch((err) => {
+        console.error("사용자 조회 실패", err);
       })
       .finally(() => {
         setIsFetching(false);
       });
   };
 
-  // page, pageSize, fetchCount が変わるたびに fetch
   useEffect(() => {
     fetchUsers();
   }, [page, pageSize, fetchCount]);
@@ -55,8 +85,7 @@ export default function UserManagementList() {
   const handleQueryClick = () => {
     setPage(0);
     setPageSize(pendingPageSize);
-    // ★ カウンタを増やして key を変化させる
-    setFetchCount(prev => prev + 1);
+    setFetchCount((prev) => prev + 1);
   };
 
   const handlePageChange = (newPage) => {
@@ -66,9 +95,48 @@ export default function UserManagementList() {
   };
 
   const handleEnterKey = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleQueryClick();
     }
+  };
+
+  const handleUserClick = (userId) => {
+    navigate(`/um?userId=${userId}`);
+  };
+
+  const toggleCheckbox = (userId) => {
+    setSelectedUserIds((prev) =>
+      prev.includes(userId)
+        ? prev.filter((id) => id !== userId)
+        : [...prev, userId]
+    );
+  };
+
+  const handleDeleteSelected = () => {
+    if (selectedUserIds.length === 0) {
+      toast.warn("삭제할 사용자를 선택하세요", { containerId: "global" });
+      return;
+    }
+
+    confirmAlert({
+      customUI: ({ onClose }) => (
+        <ConfirmDeleteModal
+          onClose={onClose}
+          onConfirm={() => {
+            axiosInstance
+              .delete("/users", { data: selectedUserIds })
+              .then(() => {
+                toast.success("삭제 완료", { containerId: "global" });
+                setSelectedUserIds([]);
+                setFetchCount((prev) => prev + 1);
+              })
+              .catch(() => {
+                toast.error("삭제 실패", { containerId: "global" });
+              });
+          }}
+        />
+      ),
+    });
   };
 
   const totalPages = Math.ceil(totalElements / pageSize);
@@ -86,7 +154,9 @@ export default function UserManagementList() {
               <input
                 type="text"
                 value={filters.loginId}
-                onChange={(e) => setFilters({ ...filters, loginId: e.target.value })}
+                onChange={(e) =>
+                  setFilters({ ...filters, loginId: e.target.value })
+                }
                 onKeyDown={handleEnterKey}
               />
             </div>
@@ -95,7 +165,9 @@ export default function UserManagementList() {
               <input
                 type="text"
                 value={filters.name}
-                onChange={(e) => setFilters({ ...filters, name: e.target.value })}
+                onChange={(e) =>
+                  setFilters({ ...filters, name: e.target.value })
+                }
                 onKeyDown={handleEnterKey}
               />
             </div>
@@ -103,7 +175,9 @@ export default function UserManagementList() {
               <label>권한</label>
               <select
                 value={filters.role}
-                onChange={(e) => setFilters({ ...filters, role: e.target.value })}
+                onChange={(e) =>
+                  setFilters({ ...filters, role: e.target.value })
+                }
                 onKeyDown={handleEnterKey}
               >
                 <option value="">전체</option>
@@ -123,7 +197,9 @@ export default function UserManagementList() {
             <option value={30}>30</option>
             <option value={50}>50</option>
           </select>
-          <button className="uml-btn uml-blue" onClick={handleQueryClick}>조회</button>
+          <button className="uml-btn uml-blue" onClick={handleQueryClick}>
+            조회
+          </button>
         </div>
       </section>
 
@@ -136,7 +212,20 @@ export default function UserManagementList() {
           <table>
             <thead>
               <tr>
-                <th><input type="checkbox" /></th>
+                <th>
+                  <input
+                    type="checkbox"
+                    onChange={(e) =>
+                      setSelectedUserIds(
+                        e.target.checked ? users.map((u) => u.id) : []
+                      )
+                    }
+                    checked={
+                      users.length > 0 &&
+                      selectedUserIds.length === users.length
+                    }
+                  />
+                </th>
                 <th>사용자 ID</th>
                 <th>사용자명</th>
                 <th>권한</th>
@@ -144,7 +233,6 @@ export default function UserManagementList() {
             </thead>
             <AnimatePresence mode="wait">
               <motion.tbody
-                // ★ key に fetchCount を含める
                 key={`page-${page}-fetch-${fetchCount}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -152,18 +240,39 @@ export default function UserManagementList() {
                 transition={{ duration: 0.3 }}
               >
                 {users.length > 0 ? (
-                  users.map((user, index) => (
-                    <tr key={index}>
-                      <td><input type="checkbox" /></td>
-                      <td>{user.loginId}</td>
-                      <td>{user.name}</td>
-                      <td>{user.role}</td>
+                  users.map((user) => (
+                    <tr key={user.id}>
+                      <td>
+                        <input
+                          type="checkbox"
+                          checked={selectedUserIds.includes(user.id)}
+                          onChange={() => toggleCheckbox(user.id)}
+                        />
+                      </td>
+                      <td
+                        className="clickable"
+                        onClick={() => handleUserClick(user.id)}
+                      >
+                        {user.loginId}
+                      </td>
+                      <td
+                        className="clickable"
+                        onClick={() => handleUserClick(user.id)}
+                      >
+                        {user.name}
+                      </td>
+                      <td
+                        className="clickable"
+                        onClick={() => handleUserClick(user.id)}
+                      >
+                        {user.role}
+                      </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="4" style={{ textAlign: 'center' }}>
-                      {isFetching ? '로딩 중...' : '표시할 사용자가 없습니다.'}
+                    <td colSpan="4" style={{ textAlign: "center" }}>
+                      {isFetching ? "로딩 중..." : "표시할 사용자가 없습니다."}
                     </td>
                   </tr>
                 )}
@@ -173,23 +282,42 @@ export default function UserManagementList() {
 
           {totalPages > 0 && (
             <div className="uml-pagination">
-              <button onClick={() => handlePageChange(0)} disabled={page === 0}>&laquo;</button>
-              <button onClick={() => handlePageChange(page - 1)} disabled={page === 0}>&lsaquo;</button>
+              <button onClick={() => handlePageChange(0)} disabled={page === 0}>
+                &laquo;
+              </button>
+              <button
+                onClick={() => handlePageChange(page - 1)}
+                disabled={page === 0}
+              >
+                &lsaquo;
+              </button>
               {Array.from({ length: visiblePageCount }, (_, i) => {
                 const pageNum = page - half + i;
                 const isValid = pageNum >= 0 && pageNum < totalPages;
                 return (
                   <span
                     key={i}
-                    className={`uml-page-number ${pageNum === page ? 'uml-active' : ''} ${!isValid ? 'uml-disabled' : ''}`}
+                    className={`uml-page-number ${
+                      pageNum === page ? "uml-active" : ""
+                    } ${!isValid ? "uml-disabled" : ""}`}
                     onClick={() => isValid && handlePageChange(pageNum)}
                   >
-                    {isValid ? pageNum + 1 : ''}
+                    {isValid ? pageNum + 1 : ""}
                   </span>
                 );
               })}
-              <button onClick={() => handlePageChange(page + 1)} disabled={page + 1 >= totalPages}>&rsaquo;</button>
-              <button onClick={() => handlePageChange(totalPages - 1)} disabled={page + 1 >= totalPages}>&raquo;</button>
+              <button
+                onClick={() => handlePageChange(page + 1)}
+                disabled={page + 1 >= totalPages}
+              >
+                &rsaquo;
+              </button>
+              <button
+                onClick={() => handlePageChange(totalPages - 1)}
+                disabled={page + 1 >= totalPages}
+              >
+                &raquo;
+              </button>
             </div>
           )}
         </div>
@@ -197,8 +325,9 @@ export default function UserManagementList() {
         <div className="uml-bottom-actions">
           <div className="uml-left-buttons" />
           <div className="uml-right-buttons">
-            <button className="uml-btn uml-blue">등록</button>
-            <button className="uml-btn uml-red">삭제</button>
+            <button className="uml-btn uml-red" onClick={handleDeleteSelected}>
+              삭제
+            </button>
           </div>
         </div>
       </section>

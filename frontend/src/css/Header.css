@@ -6,7 +6,7 @@
   padding: 16px 32px;
   background-color: #ffffff; /* 밝은 배경 */
   border-bottom: 1px solid #e0e0e0;
-  font-family: 'Noto Sans KR', 'Segoe UI', sans-serif;
+  font-family: "Noto Sans KR", "Segoe UI", sans-serif;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
@@ -14,7 +14,7 @@
 .logo {
   display: flex;
   align-items: center;
-  font-size: 24px;      /* ✅ 글씨 더 큼 */
+  font-size: 24px; /* ✅ 글씨 더 큼 */
   font-weight: 800;
   gap: 8px;
   color: #1f2a40;
@@ -23,14 +23,15 @@
 }
 
 .logo::before {
-  content: '📺';        /* ✅ 정적인 이모지 */
-  font-size: 26px;      /* ✅ 아이콘만 조금 더 큼 */
+  content: "📺"; /* ✅ 정적인 이모지 */
+  font-size: 26px; /* ✅ 아이콘만 조금 더 큼 */
   margin-right: 4px;
 }
 
 /* 애니메이션 효과 */
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }

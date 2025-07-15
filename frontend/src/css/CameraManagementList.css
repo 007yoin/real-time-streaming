@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
   background-color: #f4f5f7;
   color: #1f2937;
 }
@@ -63,7 +63,7 @@ body {
 
 .cml-filter-item input:focus,
 .cml-filter-item select:focus {
-  border-color: #4A6086;
+  border-color: #4a6086;
 }
 
 .cml-result-header {
@@ -92,7 +92,7 @@ body {
 }
 
 .cml-result-header .cml-btn {
-  background-color: #3A4F75;
+  background-color: #3a4f75;
   color: white;
   border: none;
   padding: 8px 14px;
@@ -102,7 +102,7 @@ body {
 }
 
 .cml-result-header .cml-btn:hover {
-  background-color: #2F3F5E;
+  background-color: #2f3f5e;
 }
 
 .cml-table-container {
@@ -132,7 +132,7 @@ body {
 }
 
 .cml-table-container a {
-  color: #4A6086;
+  color: #4a6086;
   text-decoration: underline;
   font-weight: 500;
 }
@@ -195,9 +195,9 @@ body {
 
 /* ✅ 선택된 페이지만 강조 */
 .cml-page-number.cml-active {
-  background-color: #3A4F75;
+  background-color: #3a4f75;
   color: white;
-  border: 1px solid #3A4F75;
+  border: 1px solid #3a4f75;
   font-weight: bold;
 }
 
@@ -230,19 +230,19 @@ body {
 }
 
 .cml-btn.cml-blue {
-  background-color: #4A5A8A;
+  background-color: #4a5a8a;
 }
 
 .cml-btn.cml-blue:hover {
-  background-color: #3B4E70;
+  background-color: #3b4e70;
 }
 
 .cml-btn.cml-red {
-  background-color: #D05C5C;
+  background-color: #d05c5c;
 }
 
 .cml-btn.cml-red:hover {
-  background-color: #B34848;
+  background-color: #b34848;
 }
 
 /* Sidebar */
@@ -286,7 +286,7 @@ body {
 }
 
 .cml-top-controls .cml-btn {
-  background-color: #4A5A8A;
+  background-color: #4a5a8a;
   color: white;
   border: none;
   padding: 8px 14px;
@@ -296,7 +296,7 @@ body {
 }
 
 .cml-top-controls .cml-btn:hover {
-  background-color: #2F3F5E;
+  background-color: #2f3f5e;
 }
 
 .cml-result-header.cml-only-count {
@@ -306,4 +306,3 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
-

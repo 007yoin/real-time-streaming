@@ -1,5 +1,5 @@
-import { useAuthCheck } from './hooks/authCheck';
-import { App } from './App';
+import { useAuthCheck } from "./hooks/authCheck";
+import { App } from "./App";
 
 export function AuthGate() {
   const loading = useAuthCheck();

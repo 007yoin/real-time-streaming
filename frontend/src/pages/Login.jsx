@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../api/userApi.js';
-import { login } from '../api/loginApi.js';
-import { setAccessToken } from '../store/tokenStore.js';
+import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../api/userApi.js";
+import { login } from "../api/loginApi.js";
+import { setAccessToken } from "../store/tokenStore.js";
 
-import 'react-toastify/dist/ReactToastify.css';
-import '../css/Login.css';
+import "react-toastify/dist/ReactToastify.css";
+import "../css/Login.css";
 
 export default function Login() {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
-    loginId: '',
-    name: '',
-    password: '',
-    passwordConfirm: ''
+    loginId: "",
+    name: "",
+    password: "",
+    passwordConfirm: "",
   });
 
   const navigate = useNavigate();
@@ -26,10 +26,10 @@ export default function Login() {
     try {
       const result = await login({ loginId, password });
       setAccessToken(result);
-      toast.success('로그인 성공!');
-      navigate('/sv');
+      toast.success("로그인 성공!");
+      navigate("/sv");
     } catch (err) {
-      toast.error(err.response?.data?.message || '로그인 실패');
+      toast.error(err.response?.data?.message || "로그인 실패");
     }
   };
 
@@ -43,7 +43,7 @@ export default function Login() {
     const { loginId, name, password, passwordConfirm } = formData;
 
     if (password !== passwordConfirm) {
-      toast.error('비밀번호가 일치하지 않습니다.');
+      toast.error("비밀번호가 일치하지 않습니다.");
       return;
     }
 
@@ -59,10 +59,10 @@ export default function Login() {
 
   useEffect(() => {
     const escHandler = (e) => {
-      if (e.key === 'Escape') setShowModal(false);
+      if (e.key === "Escape") setShowModal(false);
     };
-    window.addEventListener('keydown', escHandler);
-    return () => window.removeEventListener('keydown', escHandler);
+    window.addEventListener("keydown", escHandler);
+    return () => window.removeEventListener("keydown", escHandler);
   }, []);
 
   return (
@@ -72,7 +72,12 @@ export default function Login() {
         {showModal && (
           <div className="login-modal">
             <div className="login-modal-content">
-              <span className="login-close-btn" onClick={() => setShowModal(false)}>&times;</span>
+              <span
+                className="login-close-btn"
+                onClick={() => setShowModal(false)}
+              >
+                &times;
+              </span>
               <h2>회원가입</h2>
               <form onSubmit={handleSignup} className="login-signup-form">
                 <div className="login-input-row">
@@ -83,7 +88,9 @@ export default function Login() {
                     required
                     onChange={handleChange}
                   />
-                  <button type="button" className="login-check-id">중복확인</button>
+                  <button type="button" className="login-check-id">
+                    중복확인
+                  </button>
                 </div>
                 <input
                   type="text"
@@ -106,7 +113,9 @@ export default function Login() {
                   required
                   onChange={handleChange}
                 />
-                <button type="submit" className="login-signup-submit">가입하기</button>
+                <button type="submit" className="login-signup-submit">
+                  가입하기
+                </button>
               </form>
             </div>
           </div>
@@ -134,7 +143,13 @@ export default function Login() {
               />
               <button type="submit">로그인</button>
             </form>
-            <a href="#" className="login-signup-btn" onClick={() => setShowModal(true)}>회원가입</a>
+            <a
+              href="#"
+              className="login-signup-btn"
+              onClick={() => setShowModal(true)}
+            >
+              회원가입
+            </a>
           </div>
         </div>
       </div>

@@ -1,32 +1,32 @@
 /* Reset & Base */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f5f6f7;
-    color: #333;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f5f6f7;
+  color: #333;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* Layout */
 .sv-layout {
-    display: flex;
-    height: calc(100vh - 55px); /* 헤더 높이 제외 */
+  display: flex;
+  height: calc(100vh - 55px); /* 헤더 높이 제외 */
 }
 
 /* Main Content */
 .sv-content {
-    flex: 1;
-    padding: 20px;
-    overflow: hidden;
-    background-color: #f9f9f9;
+  flex: 1;
+  padding: 20px;
+  overflow: hidden;
+  background-color: #f9f9f9;
 }
 
 .sv-main-body {
@@ -55,142 +55,144 @@ button {
 }
 
 .sv-section {
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 6px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 6px;
 }
 
 .sv-section.toolbar,
 .sv-section.status,
 .sv-section.split-buttons {
-    flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 /* 즐겨찾기 영역 */
 .sv-toolbar {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 .sv-toolbar-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .sv-toolbar-row:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .sv-toolbar label {
-    font-size: 14px;
-    font-weight: bold;
-    min-width: 90px;
-    color: #222;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 90px;
+  color: #222;
 }
 
 .sv-toolbar input[type="text"],
 .sv-toolbar select {
-    flex: 1;
-    padding: 6px 10px;
-    border: 1px solid #bbb;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: #fff;
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
 }
-
-
 
 /* 스트리밍 현황 */
 .sv-status-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px 20px;
-    margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px;
+  margin-top: 10px;
 }
 
 .sv-status-item {
-    display: flex;
-    align-items: center;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 8px 12px;
-    border-radius: 6px;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 6px;
+  gap: 8px;
 }
 
 .sv-status-item .sv-icon {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
 }
 
 .sv-status-item .sv-count {
-    margin-left: auto;
-    font-weight: bold;
+  margin-left: auto;
+  font-weight: bold;
 }
 
 .sv-icon.pause {
-    background: #bcbcbc url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>') no-repeat center/70%;
+  background: #bcbcbc
+    url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>')
+    no-repeat center/70%;
 }
 
 .sv-icon.play {
-    background: #57c98f url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="8,5 19,12 8,19"/></svg>') no-repeat center/70%;
+  background: #57c98f
+    url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="8,5 19,12 8,19"/></svg>')
+    no-repeat center/70%;
 }
 
 .sv-icon.stop {
-    background: #e26d6d url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="12" height="12"/></svg>') no-repeat center/70%;
+  background: #e26d6d
+    url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="12" height="12"/></svg>')
+    no-repeat center/70%;
 }
 
 .sv-icon.client-stop {
-    background: #ffb84f;
+  background: #ffb84f;
 }
 
 .sv-icon.inactive {
-    background: #7e7e7e;
+  background: #7e7e7e;
 }
 
 .sv-icon.error {
-    background: #9d4edd url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15h-1v-1h1v1zm1-4h-2V7h2v6z"/></svg>') no-repeat center/70%;
+  background: #9d4edd
+    url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15h-1v-1h1v1zm1-4h-2V7h2v6z"/></svg>')
+    no-repeat center/70%;
 }
-
-
-
-
 
 /* 스트리밍 목록 */
 .sv-stream-list .sv-filter-tabs {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .sv-tab {
-    background: #ccc;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+  background: #ccc;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .sv-tab.active {
-    background: #2f3d56;
-    color: white;
+  background: #2f3d56;
+  color: white;
 }
 
 .sv-tree-view {
-    background: white;
-    padding: 10px;
-    height: 150px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
+  background: white;
+  padding: 10px;
+  height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
 .sv-action-buttons button {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .sv-right-panel {
@@ -202,11 +204,11 @@ button {
 }
 
 .sv-video-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    min-width: 800px;
-    padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  min-width: 800px;
+  padding: 10px;
 }
 
 .sv-video-box {
@@ -221,29 +223,29 @@ button {
 }
 
 .sv-video-box img {
-    width: 100%;
-    height: 100%;
-    display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .sv-section h3 {
-    font-size: 20px;
-    margin: 0 0 10px;
-    color: #222;
+  font-size: 20px;
+  margin: 0 0 10px;
+  color: #222;
 }
 
 .sv-bottom-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .sv-left-buttons,
 .sv-right-buttons {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 /* 공통 버튼 스타일 - 사이드와 어울리는 진한 톤 (#2c3552) */
@@ -251,22 +253,22 @@ button {
 .sv-split-buttons button,
 .sv-action-buttons button,
 .sv-tab {
-    background: #4a5a8a;
-    color: #ffffff;
-    border: none;
-    padding: 6px 14px;
-    font-size: 14px;
-    border-radius: 4px;
-    transition: background 0.2s ease;
-    white-space: nowrap;
-    cursor: pointer;
+  background: #4a5a8a;
+  color: #ffffff;
+  border: none;
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .sv-toolbar button:hover,
 .sv-split-buttons button:hover,
 .sv-action-buttons button:hover,
 .sv-tab:hover {
-    background: #353c5f;
+  background: #353c5f;
 }
 
 .sv-split-buttons {
@@ -278,17 +280,17 @@ button {
 }
 
 .sv-search-btn {
-    background: #4a5a8a;
-    color: #ffffff;
-    border: none;
-    padding: 6px 14px;
-    font-size: 14px;
-    border-radius: 4px;
-    transition: background 0.2s ease;
-    white-space: nowrap;
-    cursor: pointer;
+  background: #4a5a8a;
+  color: #ffffff;
+  border: none;
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .sv-search-btn:hover {
-    background: #353c5f;
+  background: #353c5f;
 }

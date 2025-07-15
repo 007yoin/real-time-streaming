@@ -1,9 +1,9 @@
-import '../css/Main.css';
+import "../css/Main.css";
 
 export function Main() {
   return (
     <main>
-        <h1>main</h1>
+      <h1>main</h1>
     </main>
   );
 }

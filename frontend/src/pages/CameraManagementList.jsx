@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import axiosInstance from '../api/axiosInstance';
-import '../css/CameraManagementList.css';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import axiosInstance from "../api/axiosInstance";
+import "../css/CameraManagementList.css";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function CameraManagementList() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function CameraManagementList() {
 
   useEffect(() => {
     if (location.state?.toast) {
-      toast.success(location.state.toast, { containerId: 'global' });
+      toast.success(location.state.toast, { containerId: "global" });
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location, navigate]);
@@ -29,15 +29,17 @@ export default function CameraManagementList() {
     else setIsFetching(true);
 
     axiosInstance
-      .get('/camera/recent', { params: { page, size } })
+      .get("/camera/recent", { params: { page, size } })
       .then((res) => {
         setCameraList(res.data.content);
         setTotalElements(res.data.totalElements);
       })
       .catch((err) => {
         if (!err.isAuthFailure) {
-          console.error('카메라 조회 실패', err);
-          toast.error('카메라 데이터를 불러오지 못했습니다.', { containerId: 'global' });
+          console.error("카메라 조회 실패", err);
+          toast.error("카메라 데이터를 불러오지 못했습니다.", {
+            containerId: "global",
+          });
         }
       })
       .finally(() => {
@@ -57,7 +59,7 @@ export default function CameraManagementList() {
   }, [page, pageSize]);
 
   const handleRegisterClick = () => {
-    navigate('/ci');
+    navigate("/ci");
   };
 
   const handlePageChange = (newPage) => {
@@ -76,19 +78,19 @@ export default function CameraManagementList() {
   const half = Math.floor(visiblePageCount / 2);
 
   const statusLabelMap = {
-    PENDING: '대기',
-    PROCESSING: '처리중',
-    STOPPED: '정지',
-    DISABLED: '비활성화',
-    AGENT_STOPPED: '에이전트정지',
+    PENDING: "대기",
+    PROCESSING: "처리중",
+    STOPPED: "정지",
+    DISABLED: "비활성화",
+    AGENT_STOPPED: "에이전트정지",
   };
 
   const statusClassMap = {
-    PENDING: 'cml-wait',
-    PROCESSING: 'cml-processing',
-    STOPPED: 'cml-stop',
-    DISABLED: 'cml-disabled',
-    AGENT_STOPPED: 'cml-agent-stop',
+    PENDING: "cml-wait",
+    PROCESSING: "cml-processing",
+    STOPPED: "cml-stop",
+    DISABLED: "cml-disabled",
+    AGENT_STOPPED: "cml-agent-stop",
   };
 
   return (
@@ -97,15 +99,27 @@ export default function CameraManagementList() {
         <h3>개별 카메라 관리</h3>
         <div className="cml-filter-panel">
           <div className="cml-filter-grid">
-            {[['스트리밍명', 'text'], ['기관명', 'text'], ['상태코드', 'select', ['선택', '대기', '처리중', '정지', '비활성화', '에이전트정지']],
-              ['대분류', 'text'], ['중분류', 'text'], ['소분류', 'text']].map(([label, type, options], i) => (
+            {[
+              ["스트리밍명", "text"],
+              ["기관명", "text"],
+              [
+                "상태코드",
+                "select",
+                ["선택", "대기", "처리중", "정지", "비활성화", "에이전트정지"],
+              ],
+              ["대분류", "text"],
+              ["중분류", "text"],
+              ["소분류", "text"],
+            ].map(([label, type, options], i) => (
               <div className="cml-filter-item" key={i}>
                 <label>{label}</label>
-                {type === 'text' ? (
+                {type === "text" ? (
                   <input type="text" />
                 ) : (
                   <select>
-                    {options.map((opt) => <option key={opt}>{opt}</option>)}
+                    {options.map((opt) => (
+                      <option key={opt}>{opt}</option>
+                    ))}
                   </select>
                 )}
               </div>
@@ -123,7 +137,9 @@ export default function CameraManagementList() {
             <option value={1000}>1000</option>
             <option value={2000}>2000</option>
           </select>
-          <button className="cml-btn" onClick={handleQueryClick}>조회</button>
+          <button className="cml-btn" onClick={handleQueryClick}>
+            조회
+          </button>
         </div>
       </section>
 
@@ -136,7 +152,9 @@ export default function CameraManagementList() {
           <table>
             <thead>
               <tr>
-                <th><input type="checkbox" /></th>
+                <th>
+                  <input type="checkbox" />
+                </th>
                 <th>스트리밍번호</th>
                 <th>스트리밍명</th>
                 <th>기관명</th>
@@ -157,24 +175,34 @@ export default function CameraManagementList() {
                 {cameraList.length > 0 ? (
                   cameraList.map((camera) => (
                     <tr key={camera.id}>
-                      <td><input type="checkbox" /></td>
-                      <td><a href="#">STREAM_{camera.id}</a></td>
-                      <td><a href="#">{camera.name}</a></td>
+                      <td>
+                        <input type="checkbox" />
+                      </td>
+                      <td>
+                        <a href="#">STREAM_{camera.id}</a>
+                      </td>
+                      <td>
+                        <a href="#">{camera.name}</a>
+                      </td>
                       <td>{camera.systemName}</td>
                       <td>{camera.categoryLarge}</td>
                       <td>{camera.categoryMedium}</td>
                       <td>{camera.categorySmall}</td>
                       <td>
-                        <span className={`cml-badge ${statusClassMap[camera.status] || 'cml-default'}`}>
-                          {statusLabelMap[camera.status] || '알수없음'}
+                        <span
+                          className={`cml-badge ${
+                            statusClassMap[camera.status] || "cml-default"
+                          }`}
+                        >
+                          {statusLabelMap[camera.status] || "알수없음"}
                         </span>
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="8" style={{ textAlign: 'center' }}>
-                      {isFetching ? '로딩 중...' : '표시할 카메라가 없습니다.'}
+                    <td colSpan="8" style={{ textAlign: "center" }}>
+                      {isFetching ? "로딩 중..." : "표시할 카메라가 없습니다."}
                     </td>
                   </tr>
                 )}
@@ -184,23 +212,42 @@ export default function CameraManagementList() {
 
           {totalPages > 0 && (
             <div className="cml-pagination">
-              <button onClick={() => handlePageChange(0)} disabled={page === 0}>&laquo;</button>
-              <button onClick={() => handlePageChange(page - 1)} disabled={page === 0}>&lsaquo;</button>
+              <button onClick={() => handlePageChange(0)} disabled={page === 0}>
+                &laquo;
+              </button>
+              <button
+                onClick={() => handlePageChange(page - 1)}
+                disabled={page === 0}
+              >
+                &lsaquo;
+              </button>
               {Array.from({ length: visiblePageCount }, (_, i) => {
                 const pageNum = page - half + i;
                 const isValid = pageNum >= 0 && pageNum < totalPages;
                 return (
                   <span
                     key={i}
-                    className={`cml-page-number ${pageNum === page ? 'cml-active' : ''} ${!isValid ? 'cml-disabled' : ''}`}
+                    className={`cml-page-number ${
+                      pageNum === page ? "cml-active" : ""
+                    } ${!isValid ? "cml-disabled" : ""}`}
                     onClick={() => isValid && handlePageChange(pageNum)}
                   >
-                    {isValid ? pageNum + 1 : ''}
+                    {isValid ? pageNum + 1 : ""}
                   </span>
                 );
               })}
-              <button onClick={() => handlePageChange(page + 1)} disabled={page + 1 >= totalPages}>&rsaquo;</button>
-              <button onClick={() => handlePageChange(totalPages - 1)} disabled={page + 1 >= totalPages}>&raquo;</button>
+              <button
+                onClick={() => handlePageChange(page + 1)}
+                disabled={page + 1 >= totalPages}
+              >
+                &rsaquo;
+              </button>
+              <button
+                onClick={() => handlePageChange(totalPages - 1)}
+                disabled={page + 1 >= totalPages}
+              >
+                &raquo;
+              </button>
             </div>
           )}
         </div>
@@ -209,12 +256,16 @@ export default function CameraManagementList() {
           <div className="cml-left-buttons">
             <button className="cml-btn cml-blue">엑셀 업로드 샘플</button>
             <button className="cml-btn cml-blue">엑셀파일 스트리밍 등록</button>
-            <button className="cml-btn cml-blue">스트리밍 데이터 다운로드</button>
+            <button className="cml-btn cml-blue">
+              스트리밍 데이터 다운로드
+            </button>
           </div>
           <div className="cml-right-buttons">
             <button className="cml-btn cml-red">정지</button>
             <button className="cml-btn cml-blue">시작</button>
-            <button className="cml-btn cml-blue" onClick={handleRegisterClick}>등록</button>
+            <button className="cml-btn cml-blue" onClick={handleRegisterClick}>
+              등록
+            </button>
           </div>
         </div>
       </section>

@@ -2,7 +2,11 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";
-import { getAccessToken, setAccessToken, clearAccessToken } from "../store/tokenStore";
+import {
+  getAccessToken,
+  setAccessToken,
+  clearAccessToken,
+} from "../store/tokenStore";
 
 export function useAuthCheck() {
   const [loading, setLoading] = useState(true);
@@ -46,7 +50,11 @@ export function useAuthCheck() {
 
         try {
           console.log("[authCheck] /auth/refresh 요청 시도");
-          const res = await axios.post("/auth/refresh", {}, { withCredentials: true });
+          const res = await axios.post(
+            "/auth/refresh",
+            {},
+            { withCredentials: true }
+          );
 
           if (res.data) {
             console.log("[authCheck] refresh 성공, 새 accessToken =", res.data);
@@ -66,7 +74,10 @@ export function useAuthCheck() {
           console.warn("[authCheck] refresh 응답 없음 or 비어있음");
           throw new Error("Refresh failed");
         } catch (refreshErr) {
-          console.error("[authCheck] /auth/refresh 실패 → 인증 불가:", refreshErr);
+          console.error(
+            "[authCheck] /auth/refresh 실패 → 인증 불가:",
+            refreshErr
+          );
           clearAccessToken();
 
           if (location.pathname !== "/login") {

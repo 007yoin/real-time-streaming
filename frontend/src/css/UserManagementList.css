@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
   background-color: #f4f5f7;
   color: #1f2937;
 }
@@ -66,7 +66,7 @@ body {
 
 .uml-filter-item input:focus,
 .uml-filter-item select:focus {
-  border-color: #4A6086;
+  border-color: #4a6086;
 }
 
 /* Result Header */
@@ -106,14 +106,14 @@ body {
 }
 
 .uml-table-container a {
-  color: #4A6086;
+  color: #4a6086;
   text-decoration: underline;
   font-weight: 500;
 }
 
 /* Pagination */
 .uml-pagination {
-  display: flex;              /* wrap 제거 */
+  display: flex; /* wrap 제거 */
   justify-content: center;
   margin-top: 20px;
   gap: 6px;
@@ -132,9 +132,9 @@ body {
 }
 
 .uml-page-number.uml-active {
-  background-color: #3A4F75;
+  background-color: #3a4f75;
   color: white;
-  border: 1px solid #3A4F75;
+  border: 1px solid #3a4f75;
   font-weight: bold;
 }
 
@@ -159,19 +159,19 @@ body {
 }
 
 .uml-btn.uml-blue {
-  background-color: #4A5A8A;
+  background-color: #4a5a8a;
 }
 
 .uml-btn.uml-blue:hover {
-  background-color: #3B4E70;
+  background-color: #3b4e70;
 }
 
 .uml-btn.uml-red {
-  background-color: #D05C5C;
+  background-color: #d05c5c;
 }
 
 .uml-btn.uml-red:hover {
-  background-color: #B34848;
+  background-color: #b34848;
 }
 
 /* Control Areas */

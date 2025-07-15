@@ -64,9 +64,13 @@ instance.interceptors.response.use(
 
       try {
         // 🔄 여기서 axios → instance로 수정
-        const refreshResponse = await instance.post("/auth/refresh", {}, {
-          withCredentials: true,
-        });
+        const refreshResponse = await instance.post(
+          "/auth/refresh",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
 
         console.log("[axiosInstance] refresh 응답:", refreshResponse.data);
 
@@ -86,7 +90,7 @@ instance.interceptors.response.use(
         if (refreshErr.response?.status === 400) {
           window.location.reload();
         }
-        
+
         return Promise.reject(refreshErr);
       }
     }

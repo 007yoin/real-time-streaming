@@ -7,26 +7,28 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
-  display: flex;            /* 푸터 고정을 위한 수직 플렉스 레이아웃 */
+  display: flex; /* 푸터 고정을 위한 수직 플렉스 레이아웃 */
   flex-direction: column;
-  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
   background-color: #f4f5f7;
   color: #1f2937;
-  overflow: hidden;         /* body 자체 스크롤 제거 – 아래 .page-container가 담당 */
+  overflow: hidden; /* body 자체 스크롤 제거 – 아래 .page-container가 담당 */
 }
 
 /* ────────── 페이지 스크롤 컨테이너 ────────── */
-.page-container {           /* <main class="page-container"> … </main> */
-  flex: 1 1 auto;           /* 남은 공간 차지 + 크기 변화 허용 */
+.page-container {
+  /* <main class="page-container"> … </main> */
+  flex: 1 1 auto; /* 남은 공간 차지 + 크기 변화 허용 */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 0;                   /* 섹션 간 간격은 margin 사용 */
+  gap: 0; /* 섹션 간 간격은 margin 사용 */
 }
 
 /* ────────── Section 공통 ────────── */
@@ -35,7 +37,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
   padding: 24px;
-  margin: 0 24px 20px;      /* 좌우 24, 아래 20 */
+  margin: 0 24px 20px; /* 좌우 24, 아래 20 */
 }
 
 .ci-section h3 {
@@ -84,7 +86,7 @@ body {
   border-radius: 6px;
   background-color: #f9fafb;
   color: #111827;
-  transition: border-color .2s;
+  transition: border-color 0.2s;
 }
 
 .ci-table input:disabled {
@@ -95,7 +97,7 @@ body {
 .ci-table input:focus,
 .ci-table select:focus,
 .ci-table textarea:focus {
-  border-color: #4A6086;
+  border-color: #4a6086;
   background-color: #ffffff;
   outline: none;
 }
@@ -119,7 +121,7 @@ body {
   justify-content: flex-end;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 24px; 
+  margin-bottom: 24px;
 }
 .ci-btn {
   padding: 10px 18px;
@@ -128,23 +130,36 @@ body {
   font-weight: 500;
   cursor: pointer;
   border: none;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
   color: #ffffff;
   white-space: nowrap;
 }
 
-.ci-btn.ci-blue { background-color: #4a5a8a; }
-.ci-btn.ci-blue:hover { background-color: #353c5f; }
+.ci-btn.ci-blue {
+  background-color: #4a5a8a;
+}
+.ci-btn.ci-blue:hover {
+  background-color: #353c5f;
+}
 
-.ci-btn.ci-red { background-color: #d05c5c; }
-.ci-btn.ci-red:hover { background-color: #b34848; }
+.ci-btn.ci-red {
+  background-color: #d05c5c;
+}
+.ci-btn.ci-red:hover {
+  background-color: #b34848;
+}
 
-.ci-btn.ci-gray { background-color: #6b7280; }
-.ci-btn.ci-gray:hover { background-color: #4b5563; }
+.ci-btn.ci-gray {
+  background-color: #6b7280;
+}
+.ci-btn.ci-gray:hover {
+  background-color: #4b5563;
+}
 
 /* ────────── 푸터 ────────── */
-.site-footer {               /* <footer class="site-footer"> … </footer> */
-  flex: 0 0 56px;            /* 고정 높이 */
+.site-footer {
+  /* <footer class="site-footer"> … </footer> */
+  flex: 0 0 56px; /* 고정 높이 */
   background: #1f2937;
   color: #ffffff;
   display: flex;

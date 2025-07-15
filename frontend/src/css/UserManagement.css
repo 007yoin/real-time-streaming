@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
   background-color: #f4f5f7;
   color: #1f2937;
 }
@@ -35,7 +35,6 @@ body {
   border-radius: 8px;
   font-size: 14px;
   table-layout: auto;
-  overflow: hidden;
 }
 
 .um-table th {
@@ -57,9 +56,7 @@ body {
   vertical-align: middle;
 }
 
-.um-table input[type="text"],
-.um-table select,
-.um-table textarea {
+.um-input {
   width: 100%;
   max-width: 100%;
   padding: 10px 12px;
@@ -72,27 +69,26 @@ body {
   box-sizing: border-box;
 }
 
-.um-table input:disabled {
-  background-color: #e5e7eb;
-  color: #6b7280;
-  cursor: not-allowed;
-}
-
-.um-table input:focus,
-.um-table select:focus,
-.um-table textarea:focus {
-  border-color: #4A6086;
+.um-input:focus {
+  border-color: #4a6086;
   background-color: #ffffff;
   outline: none;
 }
 
-.um-table textarea {
+.um-input:disabled {
+  background-color: #e0e0e0;
+  color: #9ca3af;
+  border: 1px solid #cbd5e1;
+  cursor: not-allowed;
+}
+
+textarea.um-input {
   resize: vertical;
   min-height: 80px;
   overflow: auto;
 }
 
-/* 하단 버튼 */
+/* 하단 버튼 영역 */
 .um-bottom-actions {
   margin: 0 24px 30px 24px;
   display: flex;
@@ -101,7 +97,7 @@ body {
   flex-wrap: wrap;
 }
 
-/* Button Styles */
+/* 버튼 스타일 */
 .um-btn {
   padding: 10px 18px;
   font-size: 14px;
@@ -116,11 +112,11 @@ body {
 }
 
 .um-btn.um-blue {
-  background-color: #4A5A8A;
+  background-color: #4a5a8a;
 }
 
 .um-btn.um-blue:hover {
-  background-color: #3B4E70;
+  background-color: #3b4e70;
 }
 
 .um-btn.um-gray {
@@ -132,9 +128,62 @@ body {
 }
 
 .um-btn.um-red {
-  background-color: #D05C5C;
+  background-color: #d05c5c;
 }
 
 .um-btn.um-red:hover {
-  background-color: #B34848;
+  background-color: #b34848;
+}
+
+/* 삭제 확인 모달 */
+.delete-modal {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  width: 360px;
+  max-width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
+}
+
+.delete-modal h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #1f2937;
+}
+
+.delete-modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-btn.cancel {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.modal-btn.cancel:hover {
+  background-color: #d1d5db;
+}
+
+.modal-btn.confirm {
+  background-color: #d05c5c;
+  color: white;
+}
+
+.modal-btn.confirm:hover {
+  background-color: #b34848;
 }
