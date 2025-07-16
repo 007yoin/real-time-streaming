@@ -4,11 +4,12 @@ import com.live_stream.domain.user.dto.UserDto;
 import com.live_stream.domain.user.dto.UserMapper;
 import com.live_stream.domain.user.dto.UserRequestDto;
 import jakarta.transaction.Transactional;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -43,9 +44,7 @@ public class UserService {
 
     @Transactional
     public void deleteUsers(List<Long> userIds) {
-        for (Long userId : userIds) {
-            uss.findById(userId).delete();
-        }
+        ur.softDeleteByIdIn(userIds);
     }
 
     @Transactional
