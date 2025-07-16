@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class CameraTypeDto {
 
+    private Long cameraTypeId;
     private String name;
 
 }
