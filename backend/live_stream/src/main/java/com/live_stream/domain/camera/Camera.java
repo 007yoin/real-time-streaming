@@ -2,7 +2,6 @@ package com.live_stream.domain.camera;
 
 import com.live_stream.common.baseentity.BaseEntity;
 import com.live_stream.domain.cameracategory.CameraCategory;
-import com.live_stream.domain.camerasystem.CameraSystem;
 import com.live_stream.domain.cameratype.CameraType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -27,10 +26,6 @@ public class Camera extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "camera_category_id", nullable = false)
     private CameraCategory cameraCategory;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "camera_system_id", nullable = false)
-    private CameraSystem cameraSystem;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "camera_type_id", nullable = false)
