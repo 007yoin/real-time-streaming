@@ -6,36 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { toast } from "react-toastify";
-
-// 삭제 모달 컴포넌트
-function ConfirmDeleteModal({ onClose, onConfirm }) {
-  const deleteBtnRef = useRef(null);
-
-  useEffect(() => {
-    deleteBtnRef.current?.focus();
-  }, []);
-
-  return (
-    <div className="delete-modal">
-      <h2>정말 삭제하시겠습니까?</h2>
-      <div className="delete-modal-actions">
-        <button className="modal-btn cancel" onClick={onClose}>
-          취소
-        </button>
-        <button
-          className="modal-btn confirm"
-          ref={deleteBtnRef}
-          onClick={() => {
-            onConfirm();
-            onClose();
-          }}
-        >
-          삭제
-        </button>
-      </div>
-    </div>
-  );
-}
+import { DeleteModal } from "../components/ConfirmModal";
 
 export default function UserManagementList() {
   const navigate = useNavigate();
@@ -46,7 +17,7 @@ export default function UserManagementList() {
   const [pageSize, setPageSize] = useState(10);
   const [pendingPageSize, setPendingPageSize] = useState(10);
   const [isFetching, setIsFetching] = useState(false);
-  const [fetchCount, setFetchCount] = useState(0);
+  const [fetchTrigger, setFetchTrigger] = useState(0);
 
   const [filters, setFilters] = useState({
     loginId: "",
@@ -61,9 +32,9 @@ export default function UserManagementList() {
         params: {
           page,
           size: pageSize,
-          loginId: filters.loginId || null,
-          name: filters.name || null,
-          role: filters.role || null,
+          loginId: filters.loginId || undefined,
+          name: filters.name || undefined,
+          role: filters.role || undefined,
         },
       })
       .then((res) => {
@@ -80,12 +51,12 @@ export default function UserManagementList() {
 
   useEffect(() => {
     fetchUsers();
-  }, [page, pageSize, fetchCount]);
+  }, [page, pageSize, fetchTrigger]);
 
   const handleQueryClick = () => {
     setPage(0);
     setPageSize(pendingPageSize);
-    setFetchCount((prev) => prev + 1);
+    setFetchTrigger((prev) => prev + 1);
   };
 
   const handlePageChange = (newPage) => {
@@ -120,7 +91,7 @@ export default function UserManagementList() {
 
     confirmAlert({
       customUI: ({ onClose }) => (
-        <ConfirmDeleteModal
+        <DeleteModal
           onClose={onClose}
           onConfirm={() => {
             axiosInstance
@@ -128,7 +99,7 @@ export default function UserManagementList() {
               .then(() => {
                 toast.success("삭제 완료", { containerId: "global" });
                 setSelectedUserIds([]);
-                setFetchCount((prev) => prev + 1);
+                setFetchTrigger((prev) => prev + 1);
               })
               .catch(() => {
                 toast.error("삭제 실패", { containerId: "global" });
@@ -233,7 +204,7 @@ export default function UserManagementList() {
             </thead>
             <AnimatePresence mode="wait">
               <motion.tbody
-                key={`page-${page}-fetch-${fetchCount}`}
+                key={`fetch-${fetchTrigger}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

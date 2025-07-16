@@ -5,6 +5,9 @@ import "../css/UserManagement.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { toast } from "react-toastify";
+import { ModifyModal, DeleteModal } from "../components/ConfirmModal";
+
+console.log("DeleteModal", DeleteModal);
 
 export default function UserManagement() {
   const [searchParams] = useSearchParams();
@@ -63,7 +66,7 @@ export default function UserManagement() {
 
     confirmAlert({
       customUI: ({ onClose }) => (
-        <ConfirmModal
+        <ModifyModal
           onClose={onClose}
           onConfirm={() => {
             performUpdate();
@@ -102,66 +105,6 @@ export default function UserManagement() {
       ),
     });
   };
-
-  function ConfirmModal({ onClose, onConfirm }) {
-    const confirmBtnRef = useRef(null);
-
-    useEffect(() => {
-      confirmBtnRef.current?.focus();
-
-      const handleKeyDown = (e) => {
-        if (e.key === "Enter") onConfirm();
-        if (e.key === "Escape") onClose();
-      };
-
-      window.addEventListener("keydown", handleKeyDown);
-      return () => window.removeEventListener("keydown", handleKeyDown);
-    }, []);
-
-    return (
-      <div className="delete-modal">
-        <h2>정말 수정하시겠습니까?</h2>
-        <div className="delete-modal-actions">
-          <button className="modal-btn cancel" onClick={onClose}>
-            취소
-          </button>
-          <button
-            className="modal-btn confirm-update"
-            ref={confirmBtnRef}
-            onClick={onConfirm}
-          >
-            수정
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  function DeleteModal({ onClose, onConfirm }) {
-    const confirmBtnRef = useRef(null);
-
-    useEffect(() => {
-      confirmBtnRef.current?.focus();
-    }, []);
-
-    return (
-      <div className="delete-modal">
-        <h2>정말 삭제하시겠습니까?</h2>
-        <div className="delete-modal-actions">
-          <button className="modal-btn cancel" onClick={onClose}>
-            취소
-          </button>
-          <button
-            className="modal-btn confirm"
-            ref={confirmBtnRef}
-            onClick={onConfirm}
-          >
-            삭제
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>

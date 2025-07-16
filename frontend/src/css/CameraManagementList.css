@@ -306,3 +306,52 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
+
+.cml-btn.cml-green {
+  background-color: #28a745;
+}
+
+.cml-btn.cml-green:hover {
+  background-color: #218838;
+}
+
+.cml-btn.cml-gray {
+  background-color: #6c757d;
+}
+
+.cml-btn.cml-gray:hover {
+  background-color: #5a6268;
+}
+
+.generic-modal {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  width: 360px;
+  max-width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
+}
+
+.generic-modal h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #1f2937;
+}
+
+.generic-modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-btn.cml-green {
+  background-color: #3cae3c;
+  color: white;
+}
+
+.modal-btn.cml-gray {
+  background-color: #888;
+  color: white;
+}
