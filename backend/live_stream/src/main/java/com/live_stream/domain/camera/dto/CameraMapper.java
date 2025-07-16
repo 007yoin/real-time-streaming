@@ -10,8 +10,6 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface CameraMapper {
 
-    @Mapping(source = "camera.cameraSystem.id", target = "systemId")
-    @Mapping(source = "camera.cameraSystem.name", target = "systemName")
     @Mapping(source = "camera.cameraType.id", target = "typeId")
     @Mapping(source = "camera.cameraType.name", target = "typeName")
     CameraDto toDto(Camera camera);
