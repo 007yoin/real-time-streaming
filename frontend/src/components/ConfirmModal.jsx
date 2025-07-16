@@ -26,7 +26,7 @@ export function GenericConfirmModal({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [onClose, onConfirm]);
 
   return (
     <div className="generic-modal">
@@ -71,7 +71,7 @@ export function ModifyModal({ onClose, onConfirm }) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [onClose, onConfirm]);
 
   return (
     <div className="modify-modal">
@@ -116,7 +116,7 @@ export function DeleteModal({ onClose, onConfirm }) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [onClose, onConfirm]);
 
   return (
     <div className="delete-modal">

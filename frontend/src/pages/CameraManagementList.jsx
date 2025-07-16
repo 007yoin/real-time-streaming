@@ -44,6 +44,10 @@ export default function CameraManagementList() {
     에이전트정지: "AGENT_STOPPED",
   };
 
+  const handleCameraClick = (cameraId) => {
+    navigate(`/ci/${cameraId}`);
+  };
+
   const handleActivateSelected = () => {
     if (selectedCameraIds.length === 0) {
       toast.warn("활성화할 카메라를 선택하세요", { containerId: "global" });
@@ -499,7 +503,13 @@ export default function CameraManagementList() {
                         />
                       </td>
                       <td>STREAM_{camera.id}</td>
-                      <td>{camera.name}</td>
+                      <td
+                        className="clickable"
+                        onClick={() => handleCameraClick(camera.id)}
+                      >
+                        {camera.name}
+                      </td>
+
                       <td>{camera.largeCategoryName || ""}</td>
                       <td>{camera.mediumCategoryName || ""}</td>
                       <td>{camera.smallCategoryName || ""}</td>

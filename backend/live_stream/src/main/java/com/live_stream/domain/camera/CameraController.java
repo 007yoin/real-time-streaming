@@ -27,6 +27,11 @@ public class CameraController {
         return cs.save(cameraInsertDto);
     }
 
+    @GetMapping("/camera/{id}")
+    public CameraDto findCameraById(@PathVariable Long id) {
+        return css.findCameraById(id);
+    }
+
     @GetMapping("/camera/search")
     public Page<CameraDto> searchCameras(CameraSearchCondition condition,
                                          @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {

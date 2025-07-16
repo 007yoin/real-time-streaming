@@ -16,4 +16,11 @@ public class CameraSearchService {
     public Page<CameraDto> searchCameras(CameraSearchCondition condition, Pageable pageable) {
         return cr.search(condition, pageable);
     }
+
+    public CameraDto findCameraById(Long id) {
+        Camera camera = cr.findWithAllRelationsById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Camera not found with id: " + id));
+
+        return CameraDto.fromEntity(camera);
+    }
 }

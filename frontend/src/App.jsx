@@ -8,7 +8,8 @@ import StreamingViewer from "./pages/StreamingViewer.jsx";
 import CameraManagementList from "./pages/CameraManagementList.jsx";
 import UserManagementList from "./pages/UserManagementList.jsx";
 import UserManagement from "./pages/UserManagement.jsx";
-import CameraInsert from "./pages/CameraInsert.jsx";
+import CameraForm from "./pages/CameraForm.jsx";
+// import CameraFormWrapper from "./pages/CameraFormWrapper";
 import LoginPage from "./pages/Login.jsx";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -71,7 +72,15 @@ export function App() {
                       <Route path="/cml" element={<CameraManagementList />} />
                       <Route path="/uml" element={<UserManagementList />} />
                       <Route path="/um" element={<UserManagement />} />
-                      <Route path="/ci" element={<CameraInsert />} />
+                      {/* 등록 */}
+                      <Route path="/ci" element={<CameraForm />} />
+
+                      {/* 수정 */}
+                      <Route
+                        path="/ci/:cameraId"
+                        element={<CameraFormWrapper />}
+                      />
+
                       <Route path="/" element={<h1>🏠 홈입니다</h1>} />
                       <Route
                         path="*"

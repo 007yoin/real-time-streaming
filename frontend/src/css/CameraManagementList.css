@@ -355,3 +355,9 @@ body {
   background-color: #888;
   color: white;
 }
+
+.clickable {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
