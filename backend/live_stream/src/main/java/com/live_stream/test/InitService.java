@@ -1,16 +1,9 @@
 package com.live_stream.test;
 
-import static com.live_stream.domain.cameracategory.CameraCategoryType.LARGE;
-import static com.live_stream.domain.cameracategory.CameraCategoryType.MEDIUM;
-import static com.live_stream.domain.user.Role.ADMIN;
-import static com.live_stream.domain.user.Role.USER;
-
 import com.live_stream.domain.camera.CameraService;
 import com.live_stream.domain.camera.dto.CameraInsertDto;
 import com.live_stream.domain.cameracategory.CameraCategoryService;
 import com.live_stream.domain.cameracategory.dto.CameraCategoryDto;
-import com.live_stream.domain.camerasystem.CameraSystemService;
-import com.live_stream.domain.camerasystem.dto.CameraSystemDto;
 import com.live_stream.domain.cameratype.CameraTypeService;
 import com.live_stream.domain.cameratype.dto.CameraTypeDto;
 import com.live_stream.domain.user.UserService;
@@ -20,6 +13,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import static com.live_stream.domain.cameracategory.CameraCategoryType.*;
+import static com.live_stream.domain.user.Role.ADMIN;
+import static com.live_stream.domain.user.Role.USER;
+
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -27,7 +24,7 @@ public class InitService {
 
     private final UserService us;
     private final CameraService cs;
-    private final CameraSystemService css;
+
     private final CameraTypeService cts;
     private final CameraCategoryService ccs;
 
@@ -35,10 +32,8 @@ public class InitService {
     public void init() {
         userInit();
 
-        cameraSystemInit();
         cameraTypeInit();
         cameraCategoryInit();
-
         cameraInit();
     }
 
@@ -69,23 +64,15 @@ public class InitService {
 
     }
 
-    private void cameraSystemInit() {
-        CameraSystemDto cameraSystemDto = new CameraSystemDto(
-                "Camera-System-#1", "1번 시스템",
-                false, false
-        );
-        css.save(cameraSystemDto);
-    }
-
     private void cameraTypeInit() {
         CameraTypeDto ctDto1 = new CameraTypeDto(
-                "도로"
+                null, "도로"
         );
         CameraTypeDto ctDto2 = new CameraTypeDto(
-                "하천"
+                null, "하천"
         );
         CameraTypeDto ctDto3 = new CameraTypeDto(
-                "학교앞"
+                null, "학교앞"
         );
 
         cts.save(ctDto1);
@@ -101,17 +88,33 @@ public class InitService {
         CameraCategoryDto savedCategory1 = ccs.save(catDto1);
 
         CameraCategoryDto catDto2 = new CameraCategoryDto(
-                null, MEDIUM, savedCategory1.getCategoryId(), "용인교통정보센터"
+                null, MEDIUM, savedCategory1.getCategoryId(), "용인교통"
         );
 
-        ccs.save(catDto2);
+        CameraCategoryDto catDto22 = new CameraCategoryDto(
+                null, MEDIUM, savedCategory1.getCategoryId(), "수원교통"
+        );
+
+        CameraCategoryDto savedCategory2 = ccs.save(catDto2);
+        ccs.save(catDto22);
+
+        CameraCategoryDto catDto3 = new CameraCategoryDto(
+                null, SMALL, savedCategory2.getCategoryId(), "수지구"
+        );
+
+        CameraCategoryDto catDto33 = new CameraCategoryDto(
+                null, SMALL, savedCategory2.getCategoryId(), "기흥구"
+        );
+
+        ccs.save(catDto3);
+        ccs.save(catDto33);
     }
 
     private void cameraInit() {
         CameraInsertDto cameraInsertDto1 = new CameraInsertDto(
                 "흥덕교",
                 "흥덕교 부근",
-                1L, 2L, 2L,
+                1L, 4L,
                 "http://211.249.12.147:1935/live/video69.stream/playlist.m3u8",
                 "주소", 37.2716932, 127.0910779
         );
@@ -119,7 +122,7 @@ public class InitService {
         CameraInsertDto cameraInsertDto2 = new CameraInsertDto(
                 "죽전육교",
                 "죽전육교 부근",
-                1L, 2L, 2L,
+                1L, 4L,
                 "http://211.249.12.147:1935/live/video86.stream/playlist.m3u8",
                 "도로", 37.32723616, 127.13377143
         );
@@ -127,7 +130,7 @@ public class InitService {
         CameraInsertDto cameraInsertDto3 = new CameraInsertDto(
                 "화운사입구3",
                 "화운사입구3 부근",
-                1L, 2L, 1L,
+                1L, 4L,
                 "http://211.249.12.147:1935/live/video34.stream/playlist.m3u8",
                 "도로", 37.2541872, 127.1660996
         );
@@ -135,7 +138,7 @@ public class InitService {
         CameraInsertDto cameraInsertDto4 = new CameraInsertDto(
                 "호수공원삼거리",
                 "호수공원삼거리 부근",
-                1L, 2L, 1L,
+                1L, 4L,
                 "http://211.249.12.147:1935/live/video22.stream/playlist.m3u8",
                 "도로", 37.2757328, 127.1481881
         );
@@ -143,7 +146,7 @@ public class InitService {
         CameraInsertDto cameraInsertDto5 = new CameraInsertDto(
                 "풍덕천사거리",
                 "풍덕천사거리 부근",
-                1L, 2L, 1L,
+                1L, 4L,
                 "http://211.249.12.147:1935/live/video9.stream/playlist.m3u8",
                 "도로", 37.3243, 127.1027
         );
