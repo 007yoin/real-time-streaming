@@ -9,7 +9,7 @@ import CameraManagementList from "./pages/CameraManagementList.jsx";
 import UserManagementList from "./pages/UserManagementList.jsx";
 import UserManagement from "./pages/UserManagement.jsx";
 import CameraForm from "./pages/CameraForm.jsx";
-// import CameraFormWrapper from "./pages/CameraFormWrapper";
+import CameraFormWrapper from "./pages/CameraFormWrapper";
 import LoginPage from "./pages/Login.jsx";
 
 import { AnimatePresence, motion } from "framer-motion";

@@ -252,3 +252,17 @@ body {
   background-color: #d1d5db;
   color: #1f2937;
 }
+
+.clickable {
+  cursor: default;
+  color: inherit; /* 상속된 색상 유지 */
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+.clickable:visited,
+.clickable:focus,
+.clickable:active,
+.clickable:hover {
+  color: inherit; /* 어떤 상태에서도 색상 고정 */
+  text-decoration: none; /* 밑줄 제거 */
+}

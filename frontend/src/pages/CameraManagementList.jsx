@@ -60,7 +60,7 @@ export default function CameraManagementList() {
           onClose={onClose}
           onConfirm={() => {
             axiosInstance
-              .post("/cameras/activate", selectedCameraIds)
+              .patch("/cameras/activate", selectedCameraIds)
               .then(() => {
                 toast.success("활성화 완료", { containerId: "global" });
                 setSelectedCameraIds([]);
@@ -91,7 +91,7 @@ export default function CameraManagementList() {
           onClose={onClose}
           onConfirm={() => {
             axiosInstance
-              .post("/cameras/deactivate", selectedCameraIds)
+              .patch("/cameras/deactivate", selectedCameraIds)
               .then(() => {
                 setSelectedCameraIds([]);
                 toast.success("비활성화 완료", { containerId: "global" });
@@ -493,7 +493,9 @@ export default function CameraManagementList() {
                         <input
                           type="checkbox"
                           checked={selectedCameraIds.includes(camera.id)}
+                          onClick={(e) => e.stopPropagation()}
                           onChange={(e) => {
+                            e.stopPropagation();
                             setSelectedCameraIds((prev) =>
                               e.target.checked
                                 ? [...prev, camera.id]
@@ -502,19 +504,25 @@ export default function CameraManagementList() {
                           }}
                         />
                       </td>
-                      <td>STREAM_{camera.id}</td>
-                      <td
-                        className="clickable"
-                        onClick={() => handleCameraClick(camera.id)}
-                      >
+                      <td onClick={() => handleCameraClick(camera.id)}>
+                        STREAM_{camera.id}
+                      </td>
+                      <td onClick={() => handleCameraClick(camera.id)}>
                         {camera.name}
                       </td>
-
-                      <td>{camera.largeCategoryName || ""}</td>
-                      <td>{camera.mediumCategoryName || ""}</td>
-                      <td>{camera.smallCategoryName || ""}</td>
-                      <td>{camera.typeName || ""}</td>
-                      <td>
+                      <td onClick={() => handleCameraClick(camera.id)}>
+                        {camera.largeCategoryName || ""}
+                      </td>
+                      <td onClick={() => handleCameraClick(camera.id)}>
+                        {camera.mediumCategoryName || ""}
+                      </td>
+                      <td onClick={() => handleCameraClick(camera.id)}>
+                        {camera.smallCategoryName || ""}
+                      </td>
+                      <td onClick={() => handleCameraClick(camera.id)}>
+                        {camera.typeName || ""}
+                      </td>
+                      <td onClick={() => handleCameraClick(camera.id)}>
                         <span
                           className={`cml-badge ${
                             camera.active ? "cml-active" : "cml-inactive"
@@ -523,7 +531,7 @@ export default function CameraManagementList() {
                           {camera.active ? "활성" : "비활성"}
                         </span>
                       </td>
-                      <td>
+                      <td onClick={() => handleCameraClick(camera.id)}>
                         <span
                           className={`cml-badge ${
                             statusClassMap[camera.status] || "cml-default"
