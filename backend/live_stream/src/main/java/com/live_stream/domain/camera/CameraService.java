@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CameraService {
 
+    private final CameraSearchService css;
     private final CameraRepository cr;
     private final CameraMapper cm;
 
@@ -57,5 +58,27 @@ public class CameraService {
     @Transactional
     public void deactivateCameras(List<Long> cameraIds) {
         cr.deactivateByIdIn(cameraIds);
+    }
+
+    @Transactional
+    public CameraDto update(Long id, CameraInsertDto dto) {
+        Camera findCamera = css.findById(id);
+
+        CameraCategory category = ccss.findById(dto.getCameraCategoryId());
+
+        CameraType type = ctss.findById(dto.getCameraTypeId());
+
+        findCamera.update(
+                dto.getName(),
+                dto.getDescription(),
+                dto.getStreamingUrl(),
+                dto.getAddress(),
+                dto.getLatitude(),
+                dto.getLongitude(),
+                category,
+                type
+        );
+
+        return cm.toDto(findCamera);
     }
 }

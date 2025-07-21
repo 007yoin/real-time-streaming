@@ -1,11 +1,11 @@
-import "../css/CameraInsert.css";
+import "../css/CameraForm.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { insertCamera } from "../api/cameraApi.js";
 import { toast } from "react-toastify";
 import axiosInstance from "../api/axiosInstance.js";
 
-export default function CameraInsert() {
+export default function CameraForm({ cameraId }) {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -13,7 +13,9 @@ export default function CameraInsert() {
     description: "",
     categoryLarge: "",
     categoryMedium: "",
+    categoryMediumName: "",
     categorySmall: "",
+    categorySmallName: "",
     streamingUrl: "",
     cameraType: "",
     address: "",
@@ -25,24 +27,72 @@ export default function CameraInsert() {
   const [mediumCategories, setMediumCategories] = useState([]);
   const [smallCategories, setSmallCategories] = useState([]);
   const [cameraTypes, setCameraTypes] = useState([]);
+  const [isCategoryLoaded, setIsCategoryLoaded] = useState(false);
 
   useEffect(() => {
-    axiosInstance
-      .get("/camCategory/large")
-      .then((res) => setLargeCategories(res.data))
+    Promise.all([
+      axiosInstance.get("/camCategory/large"),
+      axiosInstance.get("/camType"),
+    ])
+      .then(([catRes, typeRes]) => {
+        setLargeCategories(catRes.data);
+        setCameraTypes(typeRes.data);
+        setIsCategoryLoaded(true);
+      })
       .catch((err) => {
-        console.error("대분류 조회 실패:", err);
-        toast.error("대분류 카테고리 로딩 실패", { containerId: "global" });
-      });
-
-    axiosInstance
-      .get("/camType")
-      .then((res) => setCameraTypes(res.data))
-      .catch((err) => {
-        console.error("카메라 유형 조회 실패:", err);
-        toast.error("카메라 유형 로딩 실패", { containerId: "global" });
+        toast.error("카테고리/유형 로딩 실패", { containerId: "global" });
       });
   }, []);
+
+  useEffect(() => {
+    if (!cameraId || !isCategoryLoaded) return;
+
+    axiosInstance
+      .get(`/camera/${cameraId}`)
+      .then((res) => {
+        const data = res.data;
+
+        setForm((prev) => ({
+          ...prev,
+          name: data.name || "",
+          description: data.description || "",
+          categoryLarge: data.largeCategoryId || "",
+          categoryMedium: data.mediumCategoryId || "",
+          categoryMediumName: data.mediumCategoryName || "",
+          categorySmall: data.smallCategoryId || "",
+          categorySmallName: data.smallCategoryName || "",
+          streamingUrl: data.streamingUrl || "",
+          cameraType: data.typeId || "",
+          address: data.address || "",
+          latitude: data.latitude || "",
+          longitude: data.longitude || "",
+        }));
+
+        // 👉 기존 값 포함
+        if (data.mediumCategoryId) {
+          setMediumCategories([
+            {
+              categoryId: data.mediumCategoryId,
+              name: data.mediumCategoryName,
+            },
+          ]);
+        }
+
+        if (data.smallCategoryId) {
+          setSmallCategories([
+            {
+              categoryId: data.smallCategoryId,
+              name: data.smallCategoryName,
+            },
+          ]);
+        }
+      })
+      .catch((err) => {
+        toast.error("카메라 정보를 불러오지 못했습니다.", {
+          containerId: "global",
+        });
+      });
+  }, [cameraId, isCategoryLoaded]);
 
   useEffect(() => {
     if (!form.categoryLarge) {
@@ -51,7 +101,9 @@ export default function CameraInsert() {
       setForm((prev) => ({
         ...prev,
         categoryMedium: "",
+        categoryMediumName: "",
         categorySmall: "",
+        categorySmallName: "",
       }));
       return;
     }
@@ -59,40 +111,59 @@ export default function CameraInsert() {
     axiosInstance
       .get(`/camCategory/medium/${form.categoryLarge}`)
       .then((res) => {
-        setMediumCategories(res.data);
+        const fetched = res.data;
+        const hasCurrent =
+          form.categoryMedium &&
+          !fetched.find((c) => c.categoryId === form.categoryMedium);
+
+        const patched = hasCurrent
+          ? [
+              ...fetched,
+              {
+                categoryId: form.categoryMedium,
+                name: form.categoryMediumName || "(이전 선택값)",
+              },
+            ]
+          : fetched;
+
+        setMediumCategories(patched);
         setSmallCategories([]);
-        setForm((prev) => ({
-          ...prev,
-          categoryMedium: "",
-          categorySmall: "",
-        }));
       })
-      .catch((err) => {
-        console.error("중분류 조회 실패:", err);
+      .catch(() => {
         toast.error("중분류 카테고리 로딩 실패", { containerId: "global" });
       });
   }, [form.categoryLarge]);
 
   useEffect(() => {
-    if (!form.categoryMedium) {
+    if (!form.categoryMedium || !form.categoryLarge) {
       setSmallCategories([]);
-      setForm((prev) => ({ ...prev, categorySmall: "" }));
       return;
     }
-
-    if (!form.categoryLarge) return;
 
     axiosInstance
       .get(`/camCategory/small/${form.categoryMedium}/${form.categoryLarge}`)
       .then((res) => {
-        setSmallCategories(res.data);
-        setForm((prev) => ({ ...prev, categorySmall: "" }));
+        const fetched = res.data;
+        const hasCurrent =
+          form.categorySmall &&
+          !fetched.find((c) => c.categoryId === form.categorySmall);
+
+        const patched = hasCurrent
+          ? [
+              ...fetched,
+              {
+                categoryId: form.categorySmall,
+                name: form.categorySmallName || "(이전 선택값)",
+              },
+            ]
+          : fetched;
+
+        setSmallCategories(patched);
       })
-      .catch((err) => {
-        console.error("소분류 조회 실패:", err);
+      .catch(() => {
         toast.error("소분류 카테고리 로딩 실패", { containerId: "global" });
       });
-  }, [form.categoryMedium]);
+  }, [form.categoryLarge, form.categoryMedium]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -125,29 +196,30 @@ export default function CameraInsert() {
       cameraTypeId: cameraTypeId,
       streamingUrl: form.streamingUrl,
       address: form.address,
-      latitude: form.latitude,
-      longitude: form.longitude,
+      latitude: form.latitude ? parseFloat(form.latitude) : null,
+      longitude: form.longitude ? parseFloat(form.longitude) : null,
     };
 
     try {
-      await insertCamera(dto);
-      toast.success("등록되었습니다.", { containerId: "global" });
+      if (cameraId) {
+        await axiosInstance.put(`/camera/${cameraId}`, dto);
+        toast.success("수정되었습니다.", { containerId: "global" });
+      } else {
+        await insertCamera(dto);
+        toast.success("등록되었습니다.", { containerId: "global" });
+      }
       navigate("/cml");
     } catch (err) {
-      console.error("등록 실패:", err);
-      toast.error(
-        err.response?.data?.message || "등록 중 오류가 발생했습니다.",
-        {
-          containerId: "global",
-        }
-      );
+      toast.error(err.response?.data?.message || "오류가 발생했습니다.", {
+        containerId: "global",
+      });
     }
   };
 
   return (
     <>
       <section className="ci-section">
-        <h3>스트리밍 관리</h3>
+        <h3>{cameraId ? "스트리밍 수정" : "스트리밍 등록"}</h3>
         <table className="ci-table">
           <tbody>
             <tr>
@@ -205,7 +277,7 @@ export default function CameraInsert() {
               <td>
                 <select
                   name="categoryMedium"
-                  value={form.categoryMedium}
+                  value={form.categoryMedium || ""}
                   onChange={handleChange}
                   disabled={!form.categoryLarge}
                 >
@@ -224,7 +296,7 @@ export default function CameraInsert() {
               <td>
                 <select
                   name="categorySmall"
-                  value={form.categorySmall}
+                  value={form.categorySmall || ""}
                   onChange={handleChange}
                   disabled={!form.categoryMedium}
                 >
@@ -257,7 +329,7 @@ export default function CameraInsert() {
               <td>
                 <select
                   name="cameraType"
-                  value={form.cameraType}
+                  value={form.cameraType || ""}
                   onChange={handleChange}
                 >
                   <option value="">선택</option>
@@ -310,7 +382,7 @@ export default function CameraInsert() {
           목록
         </button>
         <button className="ci-btn ci-blue" onClick={handleSubmit}>
-          등록
+          {cameraId ? "수정" : "등록"}
         </button>
       </div>
 

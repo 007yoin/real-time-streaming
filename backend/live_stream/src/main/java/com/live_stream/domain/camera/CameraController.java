@@ -27,6 +27,11 @@ public class CameraController {
         return cs.save(cameraInsertDto);
     }
 
+    @GetMapping("/camera/{id}")
+    public CameraDto findCameraById(@PathVariable Long id) {
+        return css.findCameraById(id);
+    }
+
     @GetMapping("/camera/search")
     public Page<CameraDto> searchCameras(CameraSearchCondition condition,
                                          @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -34,22 +39,28 @@ public class CameraController {
         return css.searchCameras(condition, pageable);
     }
 
-    @DeleteMapping("/cameras")
-    public void deleteCameras(@RequestBody List<Long> cameraIds) {
-        log.debug("Delete cameras {}", cameraIds);
-        cs.deleteCameras(cameraIds);
+    @PutMapping("/camera/{id}")
+    public CameraDto update(@PathVariable Long id, @RequestBody CameraInsertDto cameraInsertDto) {
+        log.debug("Update camera id {}: {}", id, cameraInsertDto);
+        return cs.update(id, cameraInsertDto);
     }
 
-    @PostMapping("/cameras/activate")
+    @PatchMapping("/cameras/activate")
     public void activeCameras(@RequestBody List<Long> cameraIds) {
         log.debug("Activate cameras {}", cameraIds);
         cs.activeCameras(cameraIds);
     }
 
-    @PostMapping("/cameras/deactivate")
+    @PatchMapping("/cameras/deactivate")
     public void deactivateCameras(@RequestBody List<Long> cameraIds) {
         log.debug("Deactivate cameras {}", cameraIds);
         cs.deactivateCameras(cameraIds);
+    }
+
+    @DeleteMapping("/cameras")
+    public void deleteCameras(@RequestBody List<Long> cameraIds) {
+        log.debug("Delete cameras {}", cameraIds);
+        cs.deleteCameras(cameraIds);
     }
 
 }

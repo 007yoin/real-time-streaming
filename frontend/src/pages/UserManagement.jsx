@@ -45,7 +45,7 @@ export default function UserManagement() {
     };
 
     axiosInstance
-      .patch(`/user/${userId}`, updatedUser)
+      .put(`/user/${userId}`, updatedUser)
       .then(() => {
         toast.success("수정 완료", { containerId: "global" });
         navigate("/uml");
