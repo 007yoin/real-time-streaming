@@ -55,4 +55,14 @@ public class Camera extends BaseEntity {
     @Column(nullable = false)
     private boolean isDeleted = false; // 삭제 여부
 
+    public void update(String name, String description, String streamingUrl, String address, Double latitude, Double longitude, CameraCategory category, CameraType type) {
+        this.name = name;
+        this.description = description;
+        this.streamingUrl = streamingUrl;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.cameraCategory = category;
+        this.cameraType = type;
+    }
 }
