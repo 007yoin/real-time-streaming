@@ -1,11 +1,7 @@
 package com.rts.gatewayserver.filter;
 
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
-
 import com.rts.gatewayserver.jwt.JwtStatus;
 import com.rts.gatewayserver.jwt.JwtUtil;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -16,6 +12,11 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Slf4j
 @Component
@@ -28,38 +29,47 @@ public class GlobalJwtFilter implements GlobalFilter, Ordered {
             new WhitelistedRoute(HttpMethod.POST, "/auth/login"),
             new WhitelistedRoute(HttpMethod.POST, "/auth/logout"),
             new WhitelistedRoute(HttpMethod.POST, "/user"),
-            new WhitelistedRoute(HttpMethod.GET, "/auth/check"),
-            new WhitelistedRoute(HttpMethod.POST, "/auth/refresh")
+//            new WhitelistedRoute(HttpMethod.GET, "/auth/check"), //TODO 제거 현재 AuthCheckRouter 에서 처리 중
+            new WhitelistedRoute(HttpMethod.POST, "/auth/refresh"),
+            new WhitelistedRoute(HttpMethod.GET, "/auth/test")
     );
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        ServerHttpRequest request = exchange.getRequest();
-        HttpMethod method = request.getMethod();
-        String path = request.getURI().getPath();
+        log.debug("GlobalJwtFilter invoked");
 
+        HttpMethod method = exchange.getRequest().getMethod();
+        String path = exchange.getRequest().getURI().getPath();
+
+        log.debug("Request Method: {}, Request Path: {}", method, path);
+
+        // 화이트리스트면 패스
         if (isWhitelisted(method, path)) {
+            log.debug("Whitelisted path: {}, method: {} → Skipping JWT validation", path, method);
             return chain.filter(exchange);
         }
 
-        String bearer = request.getHeaders().getFirst(AUTHORIZATION);
+        String bearer = exchange.getRequest().getHeaders().getFirst(AUTHORIZATION);
         if (!hasValidBearer(bearer)) {
-            log.debug("Missing or invalid Authorization header");
+            log.debug("Missing or invalid Authorization header → Blocking request");
             return unauthorized(exchange);
         }
 
         String token = bearer.substring(7);
         JwtStatus status = jwtUtil.validateTokenStatus(token);
         if (status != JwtStatus.VALID) {
-            log.debug("JWT validation failed: {}", status);
+            log.debug("JWT validation failed → status: {} → Blocking request", status);
             return unauthorized(exchange);
         }
 
+        // 인증 성공 → 헤더 추가
         String loginId = jwtUtil.getLoginId(token);
         String role = jwtUtil.getRole(token);
         String name = jwtUtil.getName(token);
 
-        ServerHttpRequest mutatedRequest = request.mutate()
+        log.debug("JWT validated successfully → loginId: {}, role: {}, name: {}", loginId, role, name);
+
+        ServerHttpRequest mutatedRequest = exchange.getRequest().mutate()
                 .header("X-User-Id", loginId)
                 .header("X-User-Role", role)
                 .header("X-User-Name", name)
