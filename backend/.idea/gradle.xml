@@ -13,6 +13,14 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/camera-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/camera-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/config-server" />
         <option name="gradleJvm" value="corretto-21" />
         <option name="modules">
