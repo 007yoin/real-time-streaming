@@ -7,7 +7,7 @@ export default defineConfig({
     historyApiFallback: true, // SPA 핵심 설정: 직접 주소 접근 시 index.html로 라우팅
     proxy: {
       "/api": {
-        target: "http://localhost:80",
+        target: "http://localhost:8000",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

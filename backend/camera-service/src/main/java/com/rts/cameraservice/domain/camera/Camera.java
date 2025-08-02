@@ -1,0 +1,79 @@
+package com.rts.cameraservice.domain.camera;
+
+
+import static com.rts.cameraservice.domain.camera.CameraStatus.STOPPED;
+
+import com.rts.cameraservice.baseentity.BaseEntity;
+import com.rts.cameraservice.domain.cameracategory.CameraCategory;
+import com.rts.cameraservice.domain.cameratype.CameraType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
+public class Camera extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "camera_id", nullable = false, updatable = false)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "camera_category_id", nullable = false)
+    private CameraCategory cameraCategory;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "camera_type_id", nullable = false)
+    private CameraType cameraType;
+
+    @Column(nullable = false, length = 50) // unique 걸어야함
+    private String name; // 스트리밍명
+
+    private String description; // 비고
+
+    private String streamingUrl; // url
+
+    private String address; // 주소
+
+    private Double latitude; // 위도
+
+    private Double longitude; // 경도
+
+    private boolean isActive; // 활성 상태
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CameraStatus status = STOPPED; // 카메라 상태
+
+    @Builder.Default
+    @Column(nullable = false)
+    private boolean isDeleted = false; // 삭제 여부
+
+    public void update(String name, String description, String streamingUrl, String address, Double latitude,
+                       Double longitude, CameraCategory category, CameraType type) {
+        this.name = name;
+        this.description = description;
+        this.streamingUrl = streamingUrl;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.cameraCategory = category;
+        this.cameraType = type;
+    }
+}

@@ -1,0 +1,43 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth-service
+              uri: lb://AUTH-SERVICE
+              predicates:
+                - Path=/auth/**
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/user/**,/users/**
+            - id: camera-service
+              uri: lb://CAMERA-SERVICE
+              predicates:
+                - Path=/camera/**,/cameras/**,/camCategory/**,/camType/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+jwt:
+  secret: "sad98fjsd98fj8zmvusrvduawrevuyawr0vayvwrvawr=vwaa=yrav"
+
+logging:
+  level:
+    com.rts: debug # 내 코드만 debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
