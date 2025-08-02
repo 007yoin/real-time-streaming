@@ -1,4 +1,4 @@
-import "../css/streamingViewer.css";
+import "../css/StreamingViewer.css";
 
 // 임시 이미지
 import example1 from "../assets/images/example1.png";

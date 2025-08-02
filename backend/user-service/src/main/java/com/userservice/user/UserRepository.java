@@ -15,8 +15,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByLoginId(String loginId); //TODO 이 메서드가 필요한지 검토 필요
-
     @Modifying
     @Query("UPDATE User u SET u.isDeleted = true WHERE u.id IN :userIds")
     void softDeleteByIdIn(@Param("userIds") List<Long> userIds);
@@ -39,4 +37,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     );
 
     Optional<User> findByIdAndIsDeletedFalse(Long userId);
+
+    boolean existsByLoginId(String loginId);
 }

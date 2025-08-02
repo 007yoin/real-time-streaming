@@ -31,4 +31,8 @@ public class UserSearchService {
     public Page<UserDto> getRecentUsers(String loginId, String name, Role role, Pageable pageable) {
         return ur.findRecentUserDtos(loginId, name, role, pageable);
     }
+
+    public boolean existsByLoginId(String loginId) {
+        return ur.existsByLoginId(loginId);
+    }
 }

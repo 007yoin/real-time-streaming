@@ -21,8 +21,8 @@ export function useAuthCheck() {
 
       try {
         if (token) {
-          console.log("[authCheck] accessToken 존재, /auth/check 요청");
-          const res = await axios.get("/auth/check", {
+          console.log("[authCheck] accessToken 존재, /access-router 요청");
+          const res = await axios.get("/access-router", {
             headers: { Authorization: `Bearer ${token}` },
           });
 
@@ -46,7 +46,7 @@ export function useAuthCheck() {
         console.warn("[authCheck] accessToken 없음 → refresh 시도");
         throw new Error("No access token");
       } catch (checkErr) {
-        console.warn("[authCheck] /auth/check 실패, 원인:", checkErr);
+        console.warn("[authCheck] /access-router 실패, 원인:", checkErr);
 
         try {
           console.log("[authCheck] /auth/refresh 요청 시도");

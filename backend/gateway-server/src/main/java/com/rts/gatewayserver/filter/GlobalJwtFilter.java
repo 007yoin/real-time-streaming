@@ -29,7 +29,6 @@ public class GlobalJwtFilter implements GlobalFilter, Ordered {
             new WhitelistedRoute(HttpMethod.POST, "/auth/login"),
             new WhitelistedRoute(HttpMethod.POST, "/auth/logout"),
             new WhitelistedRoute(HttpMethod.POST, "/user"),
-//            new WhitelistedRoute(HttpMethod.GET, "/auth/check"), //TODO 제거 현재 AuthCheckRouter 에서 처리 중
             new WhitelistedRoute(HttpMethod.POST, "/auth/refresh"),
             new WhitelistedRoute(HttpMethod.GET, "/auth/test")
     );

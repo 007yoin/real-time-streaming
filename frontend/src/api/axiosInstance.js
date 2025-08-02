@@ -6,8 +6,16 @@ import {
 } from "../store/tokenStore";
 import { toast } from "react-toastify";
 
+// ✅ 개발/배포 환경에 따른 Gateway 주소
+const apiBaseUrl =
+  import.meta.env.MODE === "development"
+    ? "" // vite proxy가 알아서 gateway로 전달
+    : import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+
+console.log("[axiosInstance] API Base URL:", apiBaseUrl);
+
 const instance = axios.create({
-  baseURL: "/api",
+  baseURL: apiBaseUrl, // "/api" 제거
   withCredentials: true,
 });
 
@@ -49,13 +57,12 @@ instance.interceptors.response.use(
     console.warn("→ 상태 코드:", status);
     console.warn("→ 응답 메시지:", data);
 
-    if (url === "/auth/check") {
-      console.warn("[axiosInstance] /auth/check 에러 → catch로 전달");
+    if (url === "/access-router") {
+      console.warn("[axiosInstance] /access-router 에러 → catch로 전달");
       return Promise.reject(error);
     }
 
     const isExpired = status === 401;
-
     console.log("[axiosInstance] 토큰 만료 판단:", isExpired);
 
     if (isExpired && !originalRequest._retry) {
@@ -63,13 +70,10 @@ instance.interceptors.response.use(
       console.log("[axiosInstance] refresh 시도");
 
       try {
-        // 🔄 여기서 axios → instance로 수정
         const refreshResponse = await instance.post(
           "/auth/refresh",
           {},
-          {
-            withCredentials: true,
-          }
+          { withCredentials: true }
         );
 
         console.log("[axiosInstance] refresh 응답:", refreshResponse.data);

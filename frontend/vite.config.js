@@ -4,12 +4,19 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    historyApiFallback: true, // SPA 핵심 설정: 직접 주소 접근 시 index.html로 라우팅
+    historyApiFallback: true,
     proxy: {
-      "/api": {
-        target: "http://localhost:8000",
+      "/auth": {
+        target: "http://gateway-server:8000",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+      "/user": {
+        target: "http://gateway-server:8000",
+        changeOrigin: true,
+      },
+      "/camera": {
+        target: "http://gateway-server:8000",
+        changeOrigin: true,
       },
     },
   },

@@ -202,9 +202,9 @@ export default function UserManagementList() {
                 <th>권한</th>
               </tr>
             </thead>
-            <AnimatePresence mode="wait">
-              <motion.tbody
-                key={`fetch-${fetchTrigger}`}
+ <AnimatePresence mode="wait">
+   <motion.tbody
+     key={`page-${page}-size-${pageSize}-fetch-${fetchTrigger}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

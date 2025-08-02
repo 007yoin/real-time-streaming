@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+
+  eureka-server:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 40s
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "wnstjr4231!"
+      MYSQL_DATABASE: livestream
+      LANG: C.UTF-8
+      TZ: Asia/Seoul
+      MYSQL_INIT_CONNECT: "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;"
+    ports:
+      - "3306:3306"
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pwnstjr4231!"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  auth-service:
+    build: ./auth-service
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8001:8001"
+
+  user-service:
+    build: ./user-service
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8002:8002"
+
+  camera-service:
+    build: ./camera-service
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8003:8003"
+
+  gateway-server:
+    build: ./gateway-server
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+      auth-service:
+        condition: service_started
+      user-service:
+        condition: service_started
+      camera-service:
+        condition: service_started
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - gateway-server
